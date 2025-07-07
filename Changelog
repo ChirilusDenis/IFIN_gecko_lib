@@ -1,0 +1,146 @@
+5 September 2016
+*Fixing acquisition hanging problem
+**Added variable lastAcqPoll to store the poll number of the last successfull acquisition
+**Added check to see if there are more than 1 million polls with no successfull acquisition
+**If more than 1 million polls without successfull acquisition, panic resets all the modules
+**Added panicReset function the MADC-32, MTDC-32 and Caen792 modules;
+**Added temporary "I saved you" message when the RunThread calls the panicReset functions
+**Running panic test #1
+**Panic test #1, acquisition stopped, no reset
+**Running panic test #2
+**Panic test #2 successfull! Acquisition stopped, reset worked perfectly.
+**Lowering number of unsuccessful acquisition polls until reset to 100,000.
+**Changing text from "I saved you" to "Acquisition blocked. Auto-reset."
+**Running panic test #3
+**Successfully passed test. The acquisition blocked and reseted multiple times, continuint to run well. To be investigated if it affects the written data.
+
+*First stable version established. This will be the main branch
+
+6 September 2016
+*Added a new variable, lastResetPoll, to make sure that, when the acquisition is blocked, only one reset command is issued.
+**Running panic test #4
+**Test successfull. Commited to Trunk
+
+*Moved all header files to the "Include" folder
+**Commited to Trunk
+
+*Added "Return" to the Panic resets
+
+*Setting up new branch, which will eventually lead to the implementation of multi event modes and buffer reads
+**Eliminating all data processing from the MTDC-32 module DMX. Only raw data will emerge from the module.
+
+7 September 2016
+*Creating new plugin MTDC32Processor to take over the functions removed from the DMX
+**Creating a way for the new plugin to read the settings of the module it is connected to
+
+9 September 2016
+*Settings can now be transferred to the plugin from the module
+*Making routines to be able to read the settings
+*Reading settings successful!
+*Transferring processing routines to the plugin!
+
+13 September 2016
+*Because only one settings is needed from the module, the getSettings function will  be changed to int and will only return the data length format
+
+14 September 2015
+*New version is stable, commiting to trunk!
+*Started work on making the program multi event mode friendly!
+*Vector alocations have been modified to match the maximal size of the buffer, not the number of channels
+
+15 September 2016
+*Made sure the MultipleHistogramPlots ignores the event timestamp which is being sent with the event
+*Changed the update interval of the MultipleHistogramPlugin to be a multiple of seconds, not of hundreds of miliseconds
+*Renaming msecsToTimeout in MultipleHistogramPlugin to secsToTimeout
+*Renaming halfSecondTimer in MultipleHistogramPlugin to secondTimer
+*Adapting the eventbuilderBIGplugin to be able to handle buffer mode
+*Removing useless input_has_data vector
+*Removing useless total_data_length value
+*Removing useless data_length vector
+*Removing useless nofEnabledInputs value
+
+12 October 2016
+*Long break in completing this Changelog. Many changes in the meantime, Gecko entered service with success.
+*Removing the "EventBuilderBIG: File is not open for writing." message. The message is superfluous now, it appeared when a Cache would be written when the file was being changed.
+
+13 October 2016
+*Solved problem where going over run number 128 would shift the whole file by 1 byte. 
+*Clear histogram button now works properly
+*Removed useless "Axes for" option in right-click plot2d menu
+
+17 October 2016
+*Trying to filter the Calibrated plot data so that only energies that come with a time signal are plotted
+*Solved problem where changing the Histogram update time would lead to milisecond updates
+*First stage of filter done
+*Trying to filter the Calibrated plot data to remove values concurent with BGO data
+*Second stage of filter done
+*Some filter bugs squashed
+*Moved Run Name and Reset Time input signals to their own slots. This clears up a problem with some changes not sticking when reopening an .ini file.
+
+20 October 2016
+*Implementing same-zoom for all
+*Implemented same-zoom for alike spectra blocks
+*Implementing unzoom for all for alike spectra blocks
+*Fixed setting saving and loading problems
+*Fixed log zoom
+*Fixed writeToFile having a MB as 1024*1024 bytes
+
+21 October 2016
+*Changed the zoom selection area from a fixed pixel value to a percentage of the width/height of the plot
+*Changed values to 15% of the height and 5% of the width.
+*Separating autoscale into its own routine
+*Added autoscale to the Same Zoom for All routine
+*Fixed all warnings that appeared during compiling
+*Fixing warnings messed up the SameZoom signals. Corrected
+
+22 October 2016
+*Changed the autoreset feature. Eliminated the counting from the previous reset. Now it waits for 30.000.000 ticks from the last acquisition or the last reset
+*Fixed bug where Same zoom for all for filtered time would not work, but would zoom on the energies
+
+23 October 2016
+*Fixed problem with the Run header, which had the last 4 digits uninitialized.
+
+26 October 2016
+*Fixed problem where using the Same Zoom for all function in logarithmic when having a plot with no data in the file would cause an interface crash
+
+27 October 2016
+*Adding second LaBr time option to the MultipleCacheHistogram
+*Done
+*Making the autologbook
+*Done for now
+*Modified the way the calibrations are read and used, so as to accomodate for non-calibrated detectors
+*Further fine-tuning and bug squashing
+
+3 November 2016
+*Removed all the interface of the Fanout plugins, due to it being useless and needlessly redundant
+*Added a new folder, doc, for documentation
+*Added the manuals of the MADC 32, MTDC 32, SIS1100/3100, Caen 792 and Caen 775 to the doc folder
+*Started creating a Gecko manual, which can be found in the doc folder
+*Added info about the Fanout and Int->Double plugins
+
+8 November 2016
+*Calculated number of triggers
+*Propagated number of triggers and event rates to the RunManager, ScopeMainWindow and MultipleCacheHistogram
+*Cleaned up the interface of the FanoutPlugins and InttoDouble
+
+18 November 2016
+*Fixed problem with logbook where it wouldn't properly change folder when the write path was changed.
+
+22 November 2016
+*Added comments to the InttoDouble, Fanout and Processor plugins
+*Cleaned up the InttoDouble, Fanout and Processor plugins
+
+7 March 2017
+*Added a new histogram panel for long range energies for HPGes.
+*Added back the pulsing functionality after a roll-back
+
+8 March 2017
+*Removed the network capabilites from the EventBuilderBig Plugin
+*Removed Output connector from the EventBuilderBig Plugin
+
+13 March 2017
+*Finished rearranging and cleaning up the EventBuilderBig Plugin
+*Finished writing the EventBuilderBig Plugin section in the manual
+
+31 March 2017
+*Added time limit on the logbook writing of the pulsing changes. Now it will only be written if at least 10 minutes have elapsed.
+*Added capability to stop the Pulsing entirely. 

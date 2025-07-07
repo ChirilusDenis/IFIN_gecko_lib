@@ -1,0 +1,9 @@
+doc/*
+*.a
+*.o
+*.pro.user
+*.ini
+moc_*
+pushall
+gecko
+Makefile
