@@ -255,9 +255,6 @@ private:
 
     // TODO
     std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};
-
-    // TODO
-    // add root library to Makefile
 };
 
 #endif // EVENTBUILDERBIGPLUGIN_H

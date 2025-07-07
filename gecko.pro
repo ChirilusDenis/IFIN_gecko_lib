@@ -5,11 +5,13 @@ TARGET = gecko
 TEMPLATE = app
 CONFIG += qt
 QT += widgets concurrent network
-QMAKE_CC = gcc-10
-QMAKE_CXX = g++-10
-CONFIG += thread
+QMAKE_CC = gcc
+QMAKE_CXX = g++
+CONFIG += thread \
+    c++13
 QMAKE_CXXFLAGS_RELEASE += -g -march=native\
-    -O3
+    -O3 
+QMAKE_CXXFLAGS += $$system(root-config --cflags)
 LIBS += -g \
     -L$$PWD/lib/sis3100_calls \
     -l_sis3100 \
@@ -17,9 +19,11 @@ LIBS += -g \
     -lgslcblas \
     -lusb \
     -lboost_filesystem \
-    -lboost_system 
+    -lboost_system \
+    $$system(root-config --libs)
 INCLUDEPATH += include \
-    lib/sis3100_calls
+    lib/sis3100_calls \
+    $$system(root-config --incdir)
 SOURCES +=     core/2Ddisplay.cpp \
     core/baseplugin.cpp \
     core/eventbuffer.cpp \
