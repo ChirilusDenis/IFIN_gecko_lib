@@ -254,7 +254,7 @@ private:
     uint16_t *write_idx; // used to keep track of the number of entries in each 'big' branch of the data_tree
 
     // TODO
-    std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};
+    // std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};
 };
 
 #endif // EVENTBUILDERBIGPLUGIN_H

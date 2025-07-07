@@ -1437,9 +1437,15 @@ void EventBuilderBIGPlugin::makeTrees() {
     // Making branches and linking their buffers
     for(uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
         for(uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
+
             // TODO
             // make names be able to be read from a conf file
-            branch_name = "Box" + std::to_string(type_idx + 1) + "_" + param_names[param];
+            // branch_name = "Box" + std::to_string(type_idx + 1) + "_" + param_names[param];
+            // leaf_name = branch_name + "[" + std::to_string(totalNoDet[type_idx + 1]) + "]/I";
+
+
+            if (param == 0) branch_name = "Box" + std::to_string(type_idx + 1) + "_Index";
+            branch_name = "Box" + std::to_string(type_idx + 1) + "_Param" + std::to_string(param);
             leaf_name = branch_name + "[" + std::to_string(totalNoDet[type_idx + 1]) + "]/I";
 
             // Make one branch for each detector type and (index & parameters) combination
