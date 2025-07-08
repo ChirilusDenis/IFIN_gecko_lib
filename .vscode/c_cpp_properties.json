@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include/x86_64-linux-gnu/qt5/**",
-                "/snap/root-framework/943/usr/local/include/**"
+                "/snap/root-framework/943/usr/local/include/**",
+                "/snap/root-framework/943/usr/local/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

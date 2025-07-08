@@ -57,9 +57,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <bitset>
 #include <QProcess>
 
-#include "TFile.h"
-#include "TTree.h"
+#include <TFile.h>
+#include <TTree.h>
 #include <string.h>
+#include <TROOT.h>
+#include <ROOT/RConfig.hxx>
+#include <TApplication.h>
 
 class BasePlugin;
 
@@ -250,8 +253,8 @@ private:
     // std::vector<uint32_t> ***data_tree = NULL;
     uint32_t ***data_tree = NULL; // used to make a move data from the input to the roottree
 
-    uint16_t *read_idx; // used to keep track of read entries from data
-    uint16_t *write_idx; // used to keep track of the number of entries in each 'big' branch of the data_tree
+    uint16_t *read_idx = NULL; // used to keep track of read entries from data
+    uint16_t *write_idx = NULL; // used to keep track of the number of entries in each 'big' branch of the data_tree
 
     // TODO
     // std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};
