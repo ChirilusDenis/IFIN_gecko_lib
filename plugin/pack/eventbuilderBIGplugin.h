@@ -60,9 +60,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TFile.h>
 #include <TTree.h>
 #include <string.h>
-#include <TROOT.h>
-#include <ROOT/RConfig.hxx>
-#include <TApplication.h>
 
 class BasePlugin;
 

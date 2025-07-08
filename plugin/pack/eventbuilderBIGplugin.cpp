@@ -1051,6 +1051,9 @@ void EventBuilderBIGPlugin::openNewFile() {
 }
 
 void EventBuilderBIGPlugin::userProcess() {
+    // DEBUG
+    printf("User process...");
+    
     //If the configuration file is not read, write to prompt that there is a problem
     if(typeNo==0) std::cout<<"WRITING PROBLEM!! No detector configuration detected!!"<<std::endl;
 
@@ -1123,6 +1126,8 @@ void EventBuilderBIGPlugin::userProcess() {
         }
         writeToTree();
     }
+    // DEBUG
+    printf("done\n");
 }
 
 
@@ -1253,18 +1258,10 @@ void EventBuilderBIGPlugin::makeTrees() {
     // DEBUG
     // printf("Allocced c style\n");
 
-    // Initialisation of ROOT enviorement throught dummy app
-    if (!gApplication) {
-        static int argc = 1;
-        static char *argv[] = { const_cast<char *>("eventBuilderBIG"), nullptr };
-        static TApplication app("eventBuilderBIG", &argc, argv);
-        ROOT::EnableThreadSafety();
-    }
-
     // Making root tree to write in file
     roottree = new TTree("Gecko","Gecko");
     // DEBUG
-    // printf("Created tree");
+    // printf("Created tree\n");
     // Setting limit so the ttree won't autosave to a file on its own
     roottree->SetMaxTreeSize(2 * number_of_mb * 1024 * 1024);
     // DEBUG
@@ -1275,10 +1272,6 @@ void EventBuilderBIGPlugin::makeTrees() {
         for(uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
 
             // TODO
-            // make names be able to be read from a conf file
-            // branch_name = "Box" + std::to_string(type_idx + 1) + "_" + param_names[param];
-            // leaf_name = branch_name + "[" + std::to_string(totalNoDet[type_idx + 1]) + "]/I";
-
 
             if (param == 0) branch_name = "Box" + std::to_string(type_idx + 1) + "_Index";
             else branch_name = "Box" + std::to_string(type_idx + 1) + "_Param" + std::to_string(param);
@@ -1287,7 +1280,7 @@ void EventBuilderBIGPlugin::makeTrees() {
             // Make one branch for each detector type and (index & parameters) combination
             roottree->Branch(branch_name.c_str(), data_tree[type_idx][param], leaf_name.c_str());
             // DEBUG
-            printf("Creatded branch\n");
+            // printf("Creatded branch\n");
         }
     }
     // DEBUG

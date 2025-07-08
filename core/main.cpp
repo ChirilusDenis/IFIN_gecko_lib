@@ -24,8 +24,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "scopemainwindow.h"
 
+#include <TROOT.h>
+#include <ROOT/RConfig.hxx>
+#include <TApplication.h>
+
 int main(int argc, char **argv)
 {
+    // ROOT initialization
+    int ac = 1;
+    char *av[] = { const_cast<char *>("init") };
+    static TApplication app("init", &ac, av);
+    ROOT::EnableThreadSafety();
+    // TROOT("gecko", "gecko");
+
     // Setup application
     QApplication a(argc, argv);
     a.setApplicationName("GECKO");
