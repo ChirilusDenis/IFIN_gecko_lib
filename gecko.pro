@@ -9,9 +9,8 @@ QMAKE_CC = gcc
 QMAKE_CXX = g++
 CONFIG += thread \
     c++13
-QMAKE_CXXFLAGS_RELEASE += -g -march=native\
-    -O3 \
-    -g3
+QMAKE_CXXFLAGS_RELEASE += -g -march=native \
+    -ggdb
 QMAKE_CXXFLAGS += $$system(root-config --cflags)
 LIBS += -g \
     -L$$PWD/lib/sis3100_calls \

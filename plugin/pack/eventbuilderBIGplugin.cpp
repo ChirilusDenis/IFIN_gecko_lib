@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 static PluginRegistrar registrar ("eventbuilderBIG", EventBuilderBIGPlugin::create, AbstractPlugin::GroupPack, EventBuilderBIGPlugin::getEventBuilderAttributeMap());
 
-// TODO raw
 EventBuilderBIGPlugin::EventBuilderBIGPlugin(int _id, QString _name, const Attributes &_attrs)
             : BasePlugin(_id, _name)
             , attribs_ (_attrs)
@@ -107,9 +106,10 @@ EventBuilderBIGPlugin::~EventBuilderBIGPlugin()
     //     outFile.close();
     // }
 
-    // Write last data from the ttree  and free used memory
+    // Write last data from the ttree and free used memory
     if((rootfile != NULL) && rootfile->IsOpen()) {
         if (roottree != NULL) {
+            rootfile->cd();
             roottree->Write();
             delete roottree;
             // roottree = NULL;
@@ -125,7 +125,6 @@ EventBuilderBIGPlugin::~EventBuilderBIGPlugin()
 
     for(uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
         for(uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
-            // delete data_tree[type_idx][param];
             delete[] data_tree[type_idx][param];     
         }
         delete[] data_tree[type_idx];
@@ -287,7 +286,6 @@ void EventBuilderBIGPlugin::createSettings(QGridLayout * l)
         setCoincInterval->setSingleStep(10);
         connect(setCoincInterval,SIGNAL(valueChanged(int)),this,SLOT(uiInput()));
         //Choose if raw data should be written
-        // TODO raw
         // rawWriteBox = new QCheckBox();    
         // connect(rawWriteBox,SIGNAL(stateChanged(int)),this,SLOT(rawWriteChanged()));
 
@@ -377,6 +375,7 @@ void EventBuilderBIGPlugin::throwLastCache()
     // Writing the last data from the root tree and freeing used memory
     if((rootfile != NULL) && rootfile->IsOpen()) {
         if(roottree != NULL) {
+            rootfile->cd();
             roottree->Write();
             delete roottree;
             roottree = NULL;
@@ -597,7 +596,6 @@ void EventBuilderBIGPlugin::uiInput()
     offset = setCoincInterval->value();
 }
 
-// TODO raw
 // void EventBuilderBIGPlugin::rawWriteChanged()
 // {
 //     //Set if raw data will be written or not
@@ -679,7 +677,6 @@ void EventBuilderBIGPlugin::configureDetectors(QString setName) {
    chanconfig.close();
 }
 
-// TODO raw
 void EventBuilderBIGPlugin::applySettings(QSettings* settings)
 {
     //Read the settings
@@ -709,7 +706,6 @@ void EventBuilderBIGPlugin::applySettings(QSettings* settings)
     // rawWriteBox->setChecked(rawWrite);
 }
 
-// TODO raw
 void EventBuilderBIGPlugin::saveSettings(QSettings* settings)
 {
     //Save the settings
@@ -779,8 +775,8 @@ void EventBuilderBIGPlugin::runStartingEvent(){
             std::cout << "Failed to run";
 
     // NEW
-    // Create and intializa strcutures for writing in the root file
-    makeTrees();
+    // Create and intialise buffers for roottree
+    makeTreeBuffer();
     //Open new root file
     openNewFile();
 
@@ -834,7 +830,7 @@ QString EventBuilderBIGPlugin::makeFileName() {
 
 void EventBuilderBIGPlugin::openNewFile() {
     //DEUBG
-    printf("Creating new file...");
+    printf("Creating new file...\n");
 
     //Restart the reset timer
     stopResetTimer();
@@ -848,6 +844,11 @@ void EventBuilderBIGPlugin::openNewFile() {
 
     // Close and clean after old file
     if ((rootfile != NULL) && rootfile->IsOpen()) {
+        if (roottree != NULL) {
+            rootfile->cd();
+            roottree->Write();
+        }
+
         rootfile->Flush();
         rootfile->Close();
         delete rootfile;
@@ -891,18 +892,22 @@ void EventBuilderBIGPlugin::openNewFile() {
         std::string filename = makeFileName().toStdString() + ".root";
         rootfile = new TFile(filename.c_str(), "recreate");
         
-        if((rootfile != NULL) && !rootfile->IsOpen()) {
+        if((rootfile == NULL) || !rootfile->IsOpen()) {
             printf("EventBuilderBIG: ROOT file can not be created!");
             return;
         }
 
         // "Emptying" the root tree by copying it with 0 entries copied
+        // DEBUG
+        // printf("(Empty roottree...)");
         if (roottree != NULL) {
             TTree * temp = roottree->CloneTree(0);
             delete roottree;
             roottree = temp;
+            roottree->SetDirectory(rootfile);
         } else {
-            printf("EventBuuilderBIG: Error on tree emptying when creating new file!\n");
+            // printf("EventBuuilderBIG: Error on tree emptying when creating new file!\n");
+            makeTTree();
         }
 
     } else {
@@ -910,149 +915,12 @@ void EventBuilderBIGPlugin::openNewFile() {
        printf("EventBuilderBIG: The output directory does not exist and could not be created! (%s)\n",outDir.absolutePath().toStdString().c_str());
    }
    // DEBUG
-   printf("done\n");
-
-//     // If necessary, close old file and write to logbook
-//     if(outFile.isOpen()) {
-//         writeCache();
-//         outFile.close();
-//         QDateTime time=QDateTime::currentDateTime();
-//         logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
-//         logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t";
-//         logbook<<"Stopping "<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString()<<std::endl;
-
-//         if(!scriptName.isEmpty())
-//             if (!QProcess::startDetached("/bin/sh", QStringList{scriptName}))
-//                 std::cout << "Failed to run";
-//     }
-
-//     //If the output directory does not exist, try to create it
-//     outDir = QDir(writePath);
-//     if(!outDir.exists())
-//     {
-//         outDir.mkdir(writePath);
-//     }
-
-//     //Check again if the output directory exists or was created
-//     if (outDir.exists()) {
-//         outFile.setFileName(makeFileName());
-//         outFile.open(QIODevice::WriteOnly);
-//         //Update the name on the UI
-//         updateRunName();
-//         //Reset or increase the byte counters with the addition from the file header
-//         current_bytes_written = 16384;
-//         total_bytes_written += (16384);
-
-//         //If enabled, create the raw file and raw folder
-//          if(rawWrite)
-//          {
-//             QString outPath=writePath;
-//             outPath.append("/RAW");
-//             if(!QDir(outPath).exists())
-//             {
-//                 outDir.mkdir(outPath);
-//             }
-//             rawFile.setFileName(makeRawName());
-//             rawFile.open(QIODevice::WriteOnly);
-//             raw.setDevice(&rawFile);
-//             raw.setByteOrder(QDataStream::LittleEndian);
-//          }
-
-//      //Write to logbook
-//      QDateTime time=QDateTime::currentDateTime();
-//      logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
-//      logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t";
-//      logbook<<"Starting "<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString()<<std::endl;\
-
-//      if(!scriptName.isEmpty())
-//          if (!QProcess::startDetached("/bin/sh", QStringList{scriptName}))
-//              std::cout << "Failed to run";
-
-//      //Open the output file
-//      out.setDevice(&outFile);
-//      out.setByteOrder(QDataStream::LittleEndian);
-
-//      //Initialize the values for the file header
-//      uint16_t runnum=current_file_number;
-//         uint16_t *fhead;
-//         QString aux, aux1, aux2, aux3, aux4, comments;
-//         int l,w=0;
-//         fhead=( u_int16_t *) calloc(16, sizeof(u_int16_t *));
-//         comments.resize(16352);
-
-//         //Each block, including the file header, must be 16k bytes long. Comments is the file header without the block header
-//         for(int k=0;k<16352;k++)
-//             comments[k]=0;
-
-//         //Create the block header of the file header
-//         fhead[0]= 16;
-//         fhead[1]= 0;
-//         fhead[2]= runnum;
-//         fhead[3]= 18248;
-//         fhead[4]= 16;
-
-//         //Write the block header of the file header
-//         for(int k=0;k<16;k++)
-//             out<<fhead[k];
-
-//         //Write the rest of the file header
-//         l=filePrefix.size();
-
-//         for(int k=w;k<w+l;k++)
-//             comments[k]=filePrefix[k];
-//         w+=l;
-
-//         comments[w]= current_file_number;
-//         w+=2;
-
-//         aux="| Header (1 param) |";
-//         l=aux.size();
-//         for(int k=w;k<w+l;k++)
-//             comments[k]=aux[k-w];;
-//         w+=l;
-
-//         aux1="DetType";
-//         aux2=" det , ";
-//         aux4=" param)";
-//         aux3="(";
-//         for(int j=1;j<=typeNo;j++)
-//         {
-//             l=aux1.size();
-//             for(int k=w;k<w+l;k++)
-//                comments[k]=aux1[k-w];
-//             w+=l;
-//             comments[w]= j;
-//             comments[w+1]=aux3[0];
-//             comments[w+2]= totalNoDet[j];
-//             w+=3;
-//             l=aux2.size();
-//             for(int k=w;k<w+l;k++)
-//                comments[k]=aux2[k-w];
-//             w+=l;
-//             comments[w]=typeParam[j-1];
-//             w++;
-//             l=aux4.size();
-//             for(int k=w;k<w+l;k++)
-//                comments[k]=aux4[k-w];
-//             w+=l;
-//         }
-
-//         out.writeRawData( comments.toLatin1(), 16352);
-// }
-//     else {
-//         //If the folder does not exist and could not be created, write it to the terminal
-//        printf("EventBuilderBIG: The output directory does not exist and could not be created! (%s)\n",outDir.absolutePath().toStdString().c_str());
-//    }
-
-//     //Initialize the cache and written values
-//     for(int k=0;k<8176;k++)
-//         cache[k]=0;
-//     written=0;
+   printf("File done\n");
 }
 
 void EventBuilderBIGPlugin::userProcess() {
     // DEBUG
-    printf("User process...");
+    printf("User process...\n");
     
     //If the configuration file is not read, write to prompt that there is a problem
     if(typeNo==0) std::cout<<"WRITING PROBLEM!! No detector configuration detected!!"<<std::endl;
@@ -1072,7 +940,7 @@ void EventBuilderBIGPlugin::userProcess() {
 
     // File switch at a certain number of mb written or after a certain time passed
     if((current_bytes_written >= number_of_mb * 1000 * 1000) || (reset)) {
-        roottree->Write();
+        // roottree->Write();
         openNewFile();
     }
 
@@ -1127,13 +995,13 @@ void EventBuilderBIGPlugin::userProcess() {
         writeToTree();
     }
     // DEBUG
-    printf("done\n");
+    printf("User done\n");
 }
 
 
 int EventBuilderBIGPlugin::writeToTree() {\
     // DEBUG
-    printf("Writting...");
+    printf("Writting...\n");
     uint16_t read_channel, det_type_idx;
     uint32_t **big_branch;
     int local_bytes;
@@ -1217,21 +1085,22 @@ int EventBuilderBIGPlugin::writeToTree() {\
 
 
     } while(hasData);
+
     // DEBUG
-    printf("done\n");
+    printf("Write done\n");
+
     return local_bytes;
 }
 
-void EventBuilderBIGPlugin::makeTrees() {
+void EventBuilderBIGPlugin::makeTreeBuffer() {
     // DEBUG
-    printf("Trying to make trees...");
-    std::string branch_name, leaf_name;
+    printf("Making buffers...\n");
+
     uint32_t **big_branch = NULL;
 
     read_idx = (uint16_t *)calloc(nofInputs, sizeof(uint16_t));
     write_idx = (uint16_t *)calloc(typeNo, sizeof(uint16_t));
 
-    // data_tree = (std::vector<uint32_t> ***)calloc(typeNo, sizeof(std::vector<uint32_t> **));
     data_tree = (uint32_t ***)calloc(typeNo, sizeof(uint32_t **));
     // The first division is based on the detector type
     // Those nodes divide further based on the number of parameters(channels to be read) + index for each deterctor type
@@ -1240,38 +1109,42 @@ void EventBuilderBIGPlugin::makeTrees() {
 
     // Making big branches
     for(uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
-        
-        // std::vector<uint32_t> **branch = data_tree[type_idx];
-        // branch = (std::vector<uint32_t> **)calloc(typeParam[type_idx] + 1, sizeof(std::vector<uint32_t> *));
 
         big_branch = (uint32_t **)calloc(typeParam[type_idx] + 1, sizeof(uint32_t *));
 
         // Make 'sub' branches for each 'big' branch, sub branches = det index + channel data
         for(uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
+
             // Make space for future data
-            // branch[param] = new std::vector<uint32_t>();
             big_branch[param] = (uint32_t *)calloc(totalNoDet[type_idx + 1], sizeof(uint32_t));
         }
         data_tree[type_idx] = big_branch;
     }
 
     // DEBUG
-    // printf("Allocced c style\n");
+    printf("Buffers done\n");
+}
 
-    // Making root tree to write in file
-    roottree = new TTree("Gecko","Gecko");
+void EventBuilderBIGPlugin::makeTTree() {
     // DEBUG
-    // printf("Created tree\n");
+    printf("Making TTree...\n");
+
+    std::string branch_name, leaf_name;
+
+    roottree = new TTree("Gecko","Gecko");
+
+    if(rootfile != NULL)
+        roottree->SetDirectory(rootfile);
+
     // Setting limit so the ttree won't autosave to a file on its own
     roottree->SetMaxTreeSize(2 * number_of_mb * 1024 * 1024);
-    // DEBUG
-    // printf("Modif max size\n");
 
     // Making branches and linking their buffers
     for(uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
         for(uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
 
             // TODO
+            // name
 
             if (param == 0) branch_name = "Box" + std::to_string(type_idx + 1) + "_Index";
             else branch_name = "Box" + std::to_string(type_idx + 1) + "_Param" + std::to_string(param);
@@ -1279,10 +1152,12 @@ void EventBuilderBIGPlugin::makeTrees() {
 
             // Make one branch for each detector type and (index & parameters) combination
             roottree->Branch(branch_name.c_str(), data_tree[type_idx][param], leaf_name.c_str());
-            // DEBUG
-            // printf("Creatded branch\n");
         }
     }
+
     // DEBUG
-    printf("done\n");
+    // roottree->Fill();
+
+    // DEBUG
+    printf("TTree done\n");
 }

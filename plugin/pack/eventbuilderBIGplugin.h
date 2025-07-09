@@ -111,7 +111,7 @@ protected:
     int offset;
     virtual void createSettings(QGridLayout*);
     QString makeFileName();
-    QString makeRawName();
+    // QString makeRawName();
 
     QLabel* bytesFreeOnDiskLabel;
 
@@ -164,7 +164,8 @@ public:
 
     // NEW
     int writeToTree();
-    void makeTrees();
+    void makeTreeBuffer();
+    void makeTTree();
 
 
 public slots:
