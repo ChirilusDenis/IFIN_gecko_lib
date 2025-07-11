@@ -57,10 +57,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <bitset>
 #include <QProcess>
 
-#include <TFile.h>
-#include <TTree.h>
-#include <string.h>
-
 class BasePlugin;
 
 class EventBuilderBIGPlugin : public BasePlugin
@@ -77,7 +73,7 @@ protected:
     uint32_t hoursToReset;
     bool reset;
     QString writePath;
-    // bool rawWrite;
+    bool rawWrite;
     bool outputValue;
 
     QTimer* resetTimer;
@@ -106,17 +102,17 @@ protected:
     QSpinBox* timeReset;
 
     QSpinBox* setCoincInterval;
-    // QCheckBox* rawWriteBox;
+    QCheckBox* rawWriteBox;
 
     int offset;
     virtual void createSettings(QGridLayout*);
     QString makeFileName();
-    // QString makeRawName();
+    QString makeRawName();
 
     QLabel* bytesFreeOnDiskLabel;
 
     QFile outFile;
-    // QFile rawFile;
+    QFile rawFile;
     QDir outDir;
     QTimer* updateTimer;
     QTime elapsedTime;
@@ -150,7 +146,7 @@ public:
     Attributes getAttributes () const;
     static AttributeMap getEventBuilderAttributeMap ();
 
-    // void writeToCache();
+    void writeToCache();
     void setConfName(QString);
     void setScriptName(QString);
     void setWriteFolder(QString);
@@ -159,13 +155,8 @@ public:
     virtual void userProcess();
     virtual void applySettings(QSettings*);
     virtual void saveSettings(QSettings*);
-    // virtual int writeCache();
+    virtual int writeCache();
     void configureDetectors(QString);
-
-    // NEW
-    int writeToTree();
-    void makeTreeBuffer();
-    void makeTTree();
 
 
 public slots:
@@ -188,7 +179,7 @@ public slots:
     void mbSizeChanged();
     void timeResetInput();
 
-    // void rawWriteChanged();
+    void rawWriteChanged();
 
     void updateByteCounters();
     void runStartingEvent();
@@ -222,40 +213,28 @@ signals:
 private:
     std::ofstream logbook;
     QDataStream out;
-    // QDataStream raw;
+    QDataStream raw;
     bool hasData;
     uint32_t leastTime;
-    int nofInputs; // number of lines in data or dataTemp
+    int nofInputs;
 
-    int typeNo; // number of types
-    int numberOfDet; // number of detectors = number of lines in the config file without the header
+    int typeNo;
+    int numberOfDet;
     int written;
     uint64_t nofTriggers;
     uint64_t lastNofTriggers;
-    std::vector <uint16_t> noDetType; // number of detectors that fired
-    std::vector <uint32_t> totalNoDet; // how many detectors on each type
-    // uint16_t cache[8192];
-    std::vector <std::vector<uint32_t> > detchan; // config file lines without the header
-    // QVector <bool> toBeRead;
-    // QVector <bool> readIt;
-    // QVector <int> readPointer;
+    std::vector <uint16_t> noDetType;
+    std::vector <uint32_t> totalNoDet;
+    uint16_t cache[8192];
+    std::vector <std::vector<uint32_t> > detchan;
+    QVector <bool> toBeRead;
+    QVector <bool> readIt;
+    QVector <int> readPointer;
     QVector <int> typeParam;
     QVector <int> resetPosition;
-    QVector<QVector<uint32_t> > data; // input data : canale x val ts val ts ... 
-    QVector<QVector<uint32_t> > dataTemp; // split data if reset happened
+    QVector<QVector<uint32_t> > data;
+    QVector<QVector<uint32_t> > dataTemp;
 
-    // NEW
-    TFile *rootfile = NULL;
-    TTree *roottree = NULL; // data to be written in the root files
-
-    // std::vector<uint32_t> ***data_tree = NULL;
-    uint32_t ***data_tree = NULL; // used to make a move data from the input to the roottree
-
-    uint16_t *read_idx = NULL; // used to keep track of read entries from data
-    uint16_t *write_idx = NULL; // used to keep track of the number of entries in each 'big' branch of the data_tree
-
-    // TODO
-    // std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};
 };
 
 #endif // EVENTBUILDERBIGPLUGIN_H

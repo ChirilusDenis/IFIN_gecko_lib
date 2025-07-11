@@ -79,6 +79,7 @@ SOURCES       = core/2Ddisplay.cpp \
 		plugin/aux/inttodoubleplugin.cpp \
 		plugin/aux/pulsing.cpp \
 		plugin/cache/multiplecachehistogramplugin.cpp \
+		plugin/pack/eventbuilderBIGROOTplugin.cpp \
 		plugin/pack/eventbuilderBIGplugin.cpp \
 		plugin/processing/mtdc32Processor.cpp \
 		plugin/processing/madc32Processor.cpp \
@@ -114,6 +115,7 @@ SOURCES       = core/2Ddisplay.cpp \
 		moc_inttodoubleplugin.cpp \
 		moc_pulsing.cpp \
 		moc_multiplecachehistogramplugin.cpp \
+		moc_eventbuilderBIGROOTplugin.cpp \
 		moc_eventbuilderBIGplugin.cpp \
 		moc_mtdc32Processor.cpp \
 		moc_madc32Processor.cpp \
@@ -149,6 +151,7 @@ OBJECTS       = 2Ddisplay.o \
 		inttodoubleplugin.o \
 		pulsing.o \
 		multiplecachehistogramplugin.o \
+		eventbuilderBIGROOTplugin.o \
 		eventbuilderBIGplugin.o \
 		mtdc32Processor.o \
 		madc32Processor.o \
@@ -185,6 +188,7 @@ OBJECTS       = 2Ddisplay.o \
 		moc_inttodoubleplugin.o \
 		moc_pulsing.o \
 		moc_multiplecachehistogramplugin.o \
+		moc_eventbuilderBIGROOTplugin.o \
 		moc_eventbuilderBIGplugin.o \
 		moc_mtdc32Processor.o \
 		moc_madc32Processor.o \
@@ -313,6 +317,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		plugin/aux/inttodoubleplugin.h \
 		plugin/aux/pulsing.h \
 		plugin/cache/multiplecachehistogramplugin.h \
+		plugin/pack/eventbuilderBIGROOTplugin.h \
 		plugin/pack/eventbuilderBIGplugin.h \
 		plugin/processing/mtdc32Processor.h \
 		plugin/processing/madc32Processor.h \
@@ -351,6 +356,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		plugin/aux/inttodoubleplugin.cpp \
 		plugin/aux/pulsing.cpp \
 		plugin/cache/multiplecachehistogramplugin.cpp \
+		plugin/pack/eventbuilderBIGROOTplugin.cpp \
 		plugin/pack/eventbuilderBIGplugin.cpp \
 		plugin/processing/mtdc32Processor.cpp \
 		plugin/processing/madc32Processor.cpp \
@@ -544,8 +550,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents include/2Ddisplay.h include/addeditdlgs.h include/geckoremote.h include/pluginthread.h include/remotecontrolpanel.h include/runthread.h include/scopemainwindow.h include/systeminfo.h include/threadbuffer.h include/abstractinterface.h include/abstractmodule.h include/abstractplugin.h include/baseinterface.h include/basemodule.h include/baseplugin.h include/baseui.h include/confmap.h include/eventbuffer.h include/geckoui.h include/hexspinbox.h include/interfacemanager.h include/modulemanager.h include/outputplugin.h include/plot2d.h include/pluginconnector.h include/pluginconnectorplain.h include/pluginconnectorqueued.h include/pluginmanager.h include/runmanager.h include/samdsp.h include/samqvector.h include/viewport.h interface/sis3100module.h interface/sis3100ui.h module/caen792module.h module/caen792ui.h module/caenadcdmx.h module/caen_v785.h module/caen_v792.h plugin/aux/fanoutplugin.h plugin/aux/inttodoubleplugin.h plugin/aux/pulsing.h plugin/cache/multiplecachehistogramplugin.h plugin/pack/eventbuilderBIGplugin.h plugin/processing/mtdc32Processor.h plugin/processing/madc32Processor.h module/mesytec_madc_32_v2.h module/mesytecMadc32module.h module/mesytecMadc32dmx.h module/mesytecMadc32ui.h module/mesytec_mtdc_32_v2.h module/mesytecMtdc32module.h module/mesytecMtdc32dmx.h module/mesytecMtdc32ui.h plugin/cache/MatrixPlotWalk.h $(DISTDIR)/
-	$(COPY_FILE) --parents core/2Ddisplay.cpp core/baseplugin.cpp core/eventbuffer.cpp core/geckoremote.cpp core/interfacemanager.cpp core/main.cpp core/modulemanager.cpp core/outputplugin.cpp core/plot2d.cpp core/pluginconnector.cpp core/pluginmanager.cpp core/pluginthread.cpp core/remotecontrolpanel.cpp core/runmanager.cpp core/runthread.cpp core/scopemainwindow.cpp core/threadbuffer.cpp core/viewport.cpp interface/sis3100module.cpp interface/sis3100ui.cpp module/caen792module.cpp module/caen792ui.cpp module/caenadcdmx.cpp plugin/aux/fanoutplugin.cpp plugin/aux/inttodoubleplugin.cpp plugin/aux/pulsing.cpp plugin/cache/multiplecachehistogramplugin.cpp plugin/pack/eventbuilderBIGplugin.cpp plugin/processing/mtdc32Processor.cpp plugin/processing/madc32Processor.cpp module/mesytecMadc32ui.cpp module/mesytecMadc32module.cpp module/mesytecMadc32dmx.cpp module/mesytecMtdc32ui.cpp module/mesytecMtdc32module.cpp module/mesytecMtdc32dmx.cpp plugin/cache/MatrixPlotWalk.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/2Ddisplay.h include/addeditdlgs.h include/geckoremote.h include/pluginthread.h include/remotecontrolpanel.h include/runthread.h include/scopemainwindow.h include/systeminfo.h include/threadbuffer.h include/abstractinterface.h include/abstractmodule.h include/abstractplugin.h include/baseinterface.h include/basemodule.h include/baseplugin.h include/baseui.h include/confmap.h include/eventbuffer.h include/geckoui.h include/hexspinbox.h include/interfacemanager.h include/modulemanager.h include/outputplugin.h include/plot2d.h include/pluginconnector.h include/pluginconnectorplain.h include/pluginconnectorqueued.h include/pluginmanager.h include/runmanager.h include/samdsp.h include/samqvector.h include/viewport.h interface/sis3100module.h interface/sis3100ui.h module/caen792module.h module/caen792ui.h module/caenadcdmx.h module/caen_v785.h module/caen_v792.h plugin/aux/fanoutplugin.h plugin/aux/inttodoubleplugin.h plugin/aux/pulsing.h plugin/cache/multiplecachehistogramplugin.h plugin/pack/eventbuilderBIGROOTplugin.h plugin/pack/eventbuilderBIGplugin.h plugin/processing/mtdc32Processor.h plugin/processing/madc32Processor.h module/mesytec_madc_32_v2.h module/mesytecMadc32module.h module/mesytecMadc32dmx.h module/mesytecMadc32ui.h module/mesytec_mtdc_32_v2.h module/mesytecMtdc32module.h module/mesytecMtdc32dmx.h module/mesytecMtdc32ui.h plugin/cache/MatrixPlotWalk.h $(DISTDIR)/
+	$(COPY_FILE) --parents core/2Ddisplay.cpp core/baseplugin.cpp core/eventbuffer.cpp core/geckoremote.cpp core/interfacemanager.cpp core/main.cpp core/modulemanager.cpp core/outputplugin.cpp core/plot2d.cpp core/pluginconnector.cpp core/pluginmanager.cpp core/pluginthread.cpp core/remotecontrolpanel.cpp core/runmanager.cpp core/runthread.cpp core/scopemainwindow.cpp core/threadbuffer.cpp core/viewport.cpp interface/sis3100module.cpp interface/sis3100ui.cpp module/caen792module.cpp module/caen792ui.cpp module/caenadcdmx.cpp plugin/aux/fanoutplugin.cpp plugin/aux/inttodoubleplugin.cpp plugin/aux/pulsing.cpp plugin/cache/multiplecachehistogramplugin.cpp plugin/pack/eventbuilderBIGROOTplugin.cpp plugin/pack/eventbuilderBIGplugin.cpp plugin/processing/mtdc32Processor.cpp plugin/processing/madc32Processor.cpp module/mesytecMadc32ui.cpp module/mesytecMadc32module.cpp module/mesytecMadc32dmx.cpp module/mesytecMtdc32ui.cpp module/mesytecMtdc32module.cpp module/mesytecMtdc32dmx.cpp plugin/cache/MatrixPlotWalk.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -577,9 +583,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -pthread -std=c++20 -m64 -I/snap/root-framework/943/usr/local/include -O2 -g -march=native -ggdb -D_REENTRANT -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_addeditdlgs.cpp moc_geckoremote.cpp moc_pluginthread.cpp moc_remotecontrolpanel.cpp moc_runthread.cpp moc_scopemainwindow.cpp moc_systeminfo.cpp moc_threadbuffer.cpp moc_abstractmodule.cpp moc_abstractplugin.cpp moc_basemodule.cpp moc_baseplugin.cpp moc_geckoui.cpp moc_interfacemanager.cpp moc_modulemanager.cpp moc_outputplugin.cpp moc_plot2d.cpp moc_pluginmanager.cpp moc_runmanager.cpp moc_sis3100module.cpp moc_sis3100ui.cpp moc_caen792module.cpp moc_caen792ui.cpp moc_inttodoubleplugin.cpp moc_pulsing.cpp moc_multiplecachehistogramplugin.cpp moc_eventbuilderBIGplugin.cpp moc_mtdc32Processor.cpp moc_madc32Processor.cpp moc_mesytecMadc32module.cpp moc_mesytecMadc32ui.cpp moc_mesytecMtdc32module.cpp moc_mesytecMtdc32ui.cpp moc_MatrixPlotWalk.cpp
+compiler_moc_header_make_all: moc_addeditdlgs.cpp moc_geckoremote.cpp moc_pluginthread.cpp moc_remotecontrolpanel.cpp moc_runthread.cpp moc_scopemainwindow.cpp moc_systeminfo.cpp moc_threadbuffer.cpp moc_abstractmodule.cpp moc_abstractplugin.cpp moc_basemodule.cpp moc_baseplugin.cpp moc_geckoui.cpp moc_interfacemanager.cpp moc_modulemanager.cpp moc_outputplugin.cpp moc_plot2d.cpp moc_pluginmanager.cpp moc_runmanager.cpp moc_sis3100module.cpp moc_sis3100ui.cpp moc_caen792module.cpp moc_caen792ui.cpp moc_inttodoubleplugin.cpp moc_pulsing.cpp moc_multiplecachehistogramplugin.cpp moc_eventbuilderBIGROOTplugin.cpp moc_eventbuilderBIGplugin.cpp moc_mtdc32Processor.cpp moc_madc32Processor.cpp moc_mesytecMadc32module.cpp moc_mesytecMadc32ui.cpp moc_mesytecMtdc32module.cpp moc_mesytecMtdc32ui.cpp moc_MatrixPlotWalk.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_addeditdlgs.cpp moc_geckoremote.cpp moc_pluginthread.cpp moc_remotecontrolpanel.cpp moc_runthread.cpp moc_scopemainwindow.cpp moc_systeminfo.cpp moc_threadbuffer.cpp moc_abstractmodule.cpp moc_abstractplugin.cpp moc_basemodule.cpp moc_baseplugin.cpp moc_geckoui.cpp moc_interfacemanager.cpp moc_modulemanager.cpp moc_outputplugin.cpp moc_plot2d.cpp moc_pluginmanager.cpp moc_runmanager.cpp moc_sis3100module.cpp moc_sis3100ui.cpp moc_caen792module.cpp moc_caen792ui.cpp moc_inttodoubleplugin.cpp moc_pulsing.cpp moc_multiplecachehistogramplugin.cpp moc_eventbuilderBIGplugin.cpp moc_mtdc32Processor.cpp moc_madc32Processor.cpp moc_mesytecMadc32module.cpp moc_mesytecMadc32ui.cpp moc_mesytecMtdc32module.cpp moc_mesytecMtdc32ui.cpp moc_MatrixPlotWalk.cpp
+	-$(DEL_FILE) moc_addeditdlgs.cpp moc_geckoremote.cpp moc_pluginthread.cpp moc_remotecontrolpanel.cpp moc_runthread.cpp moc_scopemainwindow.cpp moc_systeminfo.cpp moc_threadbuffer.cpp moc_abstractmodule.cpp moc_abstractplugin.cpp moc_basemodule.cpp moc_baseplugin.cpp moc_geckoui.cpp moc_interfacemanager.cpp moc_modulemanager.cpp moc_outputplugin.cpp moc_plot2d.cpp moc_pluginmanager.cpp moc_runmanager.cpp moc_sis3100module.cpp moc_sis3100ui.cpp moc_caen792module.cpp moc_caen792ui.cpp moc_inttodoubleplugin.cpp moc_pulsing.cpp moc_multiplecachehistogramplugin.cpp moc_eventbuilderBIGROOTplugin.cpp moc_eventbuilderBIGplugin.cpp moc_mtdc32Processor.cpp moc_madc32Processor.cpp moc_mesytecMadc32module.cpp moc_mesytecMadc32ui.cpp moc_mesytecMtdc32module.cpp moc_mesytecMtdc32ui.cpp moc_MatrixPlotWalk.cpp
 moc_addeditdlgs.cpp: include/addeditdlgs.h \
 		include/abstractmodule.h \
 		include/abstractinterface.h \
@@ -802,7 +808,7 @@ moc_multiplecachehistogramplugin.cpp: plugin/cache/multiplecachehistogramplugin.
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/cache/multiplecachehistogramplugin.h -o moc_multiplecachehistogramplugin.cpp
 
-moc_eventbuilderBIGplugin.cpp: plugin/pack/eventbuilderBIGplugin.h \
+moc_eventbuilderBIGROOTplugin.cpp: plugin/pack/eventbuilderBIGROOTplugin.h \
 		include/baseplugin.h \
 		include/abstractplugin.h \
 		include/pluginconnector.h \
@@ -870,6 +876,18 @@ moc_eventbuilderBIGplugin.cpp: plugin/pack/eventbuilderBIGplugin.h \
 		/snap/root-framework/943/usr/local/include/TBranch.h \
 		/snap/root-framework/943/usr/local/include/TBranchCacheInfo.h \
 		/snap/root-framework/943/usr/local/include/TBits.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/pack/eventbuilderBIGROOTplugin.h -o moc_eventbuilderBIGROOTplugin.cpp
+
+moc_eventbuilderBIGplugin.cpp: plugin/pack/eventbuilderBIGplugin.h \
+		include/baseplugin.h \
+		include/abstractplugin.h \
+		include/pluginconnector.h \
+		include/modulemanager.h \
+		include/runmanager.h \
+		include/pluginmanager.h \
+		include/pluginconnectorqueued.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/pack/eventbuilderBIGplugin.h -o moc_eventbuilderBIGplugin.cpp
@@ -1286,7 +1304,7 @@ multiplecachehistogramplugin.o: plugin/cache/multiplecachehistogramplugin.cpp pl
 		include/samdsp.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o multiplecachehistogramplugin.o plugin/cache/multiplecachehistogramplugin.cpp
 
-eventbuilderBIGplugin.o: plugin/pack/eventbuilderBIGplugin.cpp plugin/pack/eventbuilderBIGplugin.h \
+eventbuilderBIGROOTplugin.o: plugin/pack/eventbuilderBIGROOTplugin.cpp plugin/pack/eventbuilderBIGROOTplugin.h \
 		include/baseplugin.h \
 		include/abstractplugin.h \
 		include/pluginconnector.h \
@@ -1354,6 +1372,16 @@ eventbuilderBIGplugin.o: plugin/pack/eventbuilderBIGplugin.cpp plugin/pack/event
 		/snap/root-framework/943/usr/local/include/TBranch.h \
 		/snap/root-framework/943/usr/local/include/TBranchCacheInfo.h \
 		/snap/root-framework/943/usr/local/include/TBits.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o eventbuilderBIGROOTplugin.o plugin/pack/eventbuilderBIGROOTplugin.cpp
+
+eventbuilderBIGplugin.o: plugin/pack/eventbuilderBIGplugin.cpp plugin/pack/eventbuilderBIGplugin.h \
+		include/baseplugin.h \
+		include/abstractplugin.h \
+		include/pluginconnector.h \
+		include/modulemanager.h \
+		include/runmanager.h \
+		include/pluginmanager.h \
+		include/pluginconnectorqueued.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o eventbuilderBIGplugin.o plugin/pack/eventbuilderBIGplugin.cpp
 
 mtdc32Processor.o: plugin/processing/mtdc32Processor.cpp plugin/processing/mtdc32Processor.h \
@@ -1580,6 +1608,9 @@ moc_pulsing.o: moc_pulsing.cpp
 
 moc_multiplecachehistogramplugin.o: moc_multiplecachehistogramplugin.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_multiplecachehistogramplugin.o moc_multiplecachehistogramplugin.cpp
+
+moc_eventbuilderBIGROOTplugin.o: moc_eventbuilderBIGROOTplugin.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_eventbuilderBIGROOTplugin.o moc_eventbuilderBIGROOTplugin.cpp
 
 moc_eventbuilderBIGplugin.o: moc_eventbuilderBIGplugin.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_eventbuilderBIGplugin.o moc_eventbuilderBIGplugin.cpp

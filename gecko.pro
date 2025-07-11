@@ -51,6 +51,7 @@ SOURCES +=     core/2Ddisplay.cpp \
     plugin/aux/inttodoubleplugin.cpp \
     plugin/aux/pulsing.cpp \
     plugin/cache/multiplecachehistogramplugin.cpp \
+    plugin/pack/eventbuilderBIGROOTplugin.cpp \
     plugin/pack/eventbuilderBIGplugin.cpp \
     plugin/processing/mtdc32Processor.cpp \
     plugin/processing/madc32Processor.cpp \
@@ -104,6 +105,7 @@ HEADERS +=     include/2Ddisplay.h \
     plugin/aux/inttodoubleplugin.h \
     plugin/aux/pulsing.h \
     plugin/cache/multiplecachehistogramplugin.h \
+    plugin/pack/eventbuilderBIGROOTplugin.h \
     plugin/pack/eventbuilderBIGplugin.h \
     plugin/processing/mtdc32Processor.h \
     plugin/processing/madc32Processor.h \
