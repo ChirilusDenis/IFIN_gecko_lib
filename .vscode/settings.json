@@ -1,6 +1,14 @@
 {
     "makefile.configureOnOpen": true,
     "files.associations": {
-        "mutex": "cpp"
+        "mutex": "cpp",
+        "vector": "cpp",
+        "typeinfo": "cpp",
+        "ctime": "cpp",
+        "qgroupbox": "cpp",
+        "qgridlayout": "cpp",
+        "variant": "cpp",
+        "random": "cpp",
+        "future": "cpp"
     }
 }

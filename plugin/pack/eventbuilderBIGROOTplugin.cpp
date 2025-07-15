@@ -122,16 +122,18 @@ EventBuilderBIGROOTPlugin::~EventBuilderBIGROOTPlugin()
         // rootfile = NULL;
     }
 
-    delete[] read_idx;
-    delete[] write_idx;
+    if (read_idx != NULL) delete[] read_idx;
+    if (write_idx != NULL) delete[] write_idx;
 
-    for(uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
-        for(uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
-            delete[] data_tree[type_idx][param];     
+    if (data_tree != NULL) {
+        for(uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
+            for(uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
+                delete[] data_tree[type_idx][param];     
+            }
+            delete[] data_tree[type_idx];
         }
-        delete[] data_tree[type_idx];
+        delete[] data_tree;
     }
-    delete[] data_tree;
 
     // DEBUG
     printf("Deconstructor done.\n");
