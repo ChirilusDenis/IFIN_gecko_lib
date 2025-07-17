@@ -16,8 +16,8 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CONCURRENT_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -D_REENTRANT -Wall -Wextra -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -pthread -std=c++20 -m64 -I/snap/root-framework/943/usr/local/include -O2 -g -march=native -ggdb -D_REENTRANT -Wall -Wextra -fPIC $(DEFINES)
-INCPATH       = -I. -Iinclude -Ilib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
+CXXFLAGS      = -pipe -pthread -std=c++20 -m64 -I/snap/root-framework/952/usr/local/include -O2 -g -march=native -ggdb -D_REENTRANT -Wall -Wextra -fPIC $(DEFINES)
+INCPATH       = -I. -Iinclude -Ilib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = gecko1.0.0
 DISTDIR = /home/denis/IFIN_practica/gecko-light/.tmp/gecko1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) -g -L/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -l_sis3100 -lgsl -lgslcblas -lusb -lboost_filesystem -lboost_system -L/snap/root-framework/943/usr/local/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/snap/root-framework/943/usr/local/lib -pthread -lm -ldl -rdynamic -lpthread /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Concurrent.so /usr/lib/x86_64-linux-gnu/libQt5Network.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL   
+LIBS          = $(SUBLIBS) -g -L/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -l_sis3100 -lgsl -lgslcblas -lusb -lboost_filesystem -lboost_system -L/snap/root-framework/952/usr/local/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lROOTNTuple -lMultiProc -lROOTDataFrame -lROOTNTupleUtil -Wl,-rpath,/snap/root-framework/952/usr/local/lib -pthread -lm -ldl -rdynamic -lpthread /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Concurrent.so /usr/lib/x86_64-linux-gnu/libQt5Network.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -581,7 +581,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -pthread -std=c++20 -m64 -I/snap/root-framework/943/usr/local/include -O2 -g -march=native -ggdb -D_REENTRANT -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -pthread -std=c++20 -m64 -I/snap/root-framework/952/usr/local/include -O2 -g -march=native -ggdb -D_REENTRANT -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_addeditdlgs.cpp moc_geckoremote.cpp moc_pluginthread.cpp moc_remotecontrolpanel.cpp moc_runthread.cpp moc_scopemainwindow.cpp moc_systeminfo.cpp moc_threadbuffer.cpp moc_abstractmodule.cpp moc_abstractplugin.cpp moc_basemodule.cpp moc_baseplugin.cpp moc_geckoui.cpp moc_interfacemanager.cpp moc_modulemanager.cpp moc_outputplugin.cpp moc_plot2d.cpp moc_pluginmanager.cpp moc_runmanager.cpp moc_sis3100module.cpp moc_sis3100ui.cpp moc_caen792module.cpp moc_caen792ui.cpp moc_inttodoubleplugin.cpp moc_pulsing.cpp moc_multiplecachehistogramplugin.cpp moc_eventbuilderBIGROOTplugin.cpp moc_eventbuilderBIGplugin.cpp moc_mtdc32Processor.cpp moc_madc32Processor.cpp moc_mesytecMadc32module.cpp moc_mesytecMadc32ui.cpp moc_mesytecMtdc32module.cpp moc_mesytecMtdc32ui.cpp moc_MatrixPlotWalk.cpp
 compiler_moc_header_clean:
@@ -598,12 +598,12 @@ moc_addeditdlgs.cpp: include/addeditdlgs.h \
 		include/hexspinbox.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/addeditdlgs.h -o moc_addeditdlgs.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/addeditdlgs.h -o moc_addeditdlgs.cpp
 
 moc_geckoremote.cpp: include/geckoremote.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/geckoremote.h -o moc_geckoremote.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/geckoremote.h -o moc_geckoremote.cpp
 
 moc_pluginthread.cpp: include/pluginthread.h \
 		include/pluginmanager.h \
@@ -613,18 +613,18 @@ moc_pluginthread.cpp: include/pluginthread.h \
 		include/modulemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/pluginthread.h -o moc_pluginthread.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/pluginthread.h -o moc_pluginthread.cpp
 
 moc_remotecontrolpanel.cpp: include/remotecontrolpanel.h \
 		include/geckoremote.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/remotecontrolpanel.h -o moc_remotecontrolpanel.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/remotecontrolpanel.h -o moc_remotecontrolpanel.cpp
 
 moc_runthread.cpp: include/runthread.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/runthread.h -o moc_runthread.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/runthread.h -o moc_runthread.cpp
 
 moc_scopemainwindow.cpp: include/scopemainwindow.h \
 		include/runthread.h \
@@ -639,28 +639,28 @@ moc_scopemainwindow.cpp: include/scopemainwindow.h \
 		include/geckoremote.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/scopemainwindow.h -o moc_scopemainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/scopemainwindow.h -o moc_scopemainwindow.cpp
 
 moc_systeminfo.cpp: include/systeminfo.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/systeminfo.h -o moc_systeminfo.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/systeminfo.h -o moc_systeminfo.cpp
 
 moc_threadbuffer.cpp: include/threadbuffer.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/threadbuffer.h -o moc_threadbuffer.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/threadbuffer.h -o moc_threadbuffer.cpp
 
 moc_abstractmodule.cpp: include/abstractmodule.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/abstractmodule.h -o moc_abstractmodule.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/abstractmodule.h -o moc_abstractmodule.cpp
 
 moc_abstractplugin.cpp: include/abstractplugin.h \
 		include/pluginconnector.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/abstractplugin.h -o moc_abstractplugin.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/abstractplugin.h -o moc_abstractplugin.cpp
 
 moc_basemodule.cpp: include/basemodule.h \
 		include/abstractmodule.h \
@@ -673,30 +673,30 @@ moc_basemodule.cpp: include/basemodule.h \
 		include/abstractplugin.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/basemodule.h -o moc_basemodule.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/basemodule.h -o moc_basemodule.cpp
 
 moc_baseplugin.cpp: include/baseplugin.h \
 		include/abstractplugin.h \
 		include/pluginconnector.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/baseplugin.h -o moc_baseplugin.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/baseplugin.h -o moc_baseplugin.cpp
 
 moc_geckoui.cpp: include/geckoui.h \
 		include/hexspinbox.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/geckoui.h -o moc_geckoui.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/geckoui.h -o moc_geckoui.cpp
 
 moc_interfacemanager.cpp: include/interfacemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/interfacemanager.h -o moc_interfacemanager.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/interfacemanager.h -o moc_interfacemanager.cpp
 
 moc_modulemanager.cpp: include/modulemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/modulemanager.h -o moc_modulemanager.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/modulemanager.h -o moc_modulemanager.cpp
 
 moc_outputplugin.cpp: include/outputplugin.h \
 		include/baseplugin.h \
@@ -704,13 +704,13 @@ moc_outputplugin.cpp: include/outputplugin.h \
 		include/pluginconnector.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/outputplugin.h -o moc_outputplugin.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/outputplugin.h -o moc_outputplugin.cpp
 
 moc_plot2d.cpp: include/plot2d.h \
 		include/samdsp.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/plot2d.h -o moc_plot2d.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/plot2d.h -o moc_plot2d.cpp
 
 moc_pluginmanager.cpp: include/pluginmanager.h \
 		include/baseplugin.h \
@@ -719,12 +719,12 @@ moc_pluginmanager.cpp: include/pluginmanager.h \
 		include/modulemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/pluginmanager.h -o moc_pluginmanager.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/pluginmanager.h -o moc_pluginmanager.cpp
 
 moc_runmanager.cpp: include/runmanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/runmanager.h -o moc_runmanager.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include include/runmanager.h -o moc_runmanager.cpp
 
 moc_sis3100module.cpp: interface/sis3100module.h \
 		lib/sis3100_calls/sis3100_vme_calls.h \
@@ -735,7 +735,7 @@ moc_sis3100module.cpp: interface/sis3100module.h \
 		include/baseui.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include interface/sis3100module.h -o moc_sis3100module.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include interface/sis3100module.h -o moc_sis3100module.cpp
 
 moc_sis3100ui.cpp: interface/sis3100ui.h \
 		interface/sis3100module.h \
@@ -746,7 +746,7 @@ moc_sis3100ui.cpp: interface/sis3100ui.h \
 		include/baseui.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include interface/sis3100ui.h -o moc_sis3100ui.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include interface/sis3100ui.h -o moc_sis3100ui.cpp
 
 moc_caen792module.cpp: module/caen792module.h \
 		include/basemodule.h \
@@ -764,14 +764,14 @@ moc_caen792module.cpp: module/caen792module.h \
 		include/modulemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/caen792module.h -o moc_caen792module.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/caen792module.h -o moc_caen792module.cpp
 
 moc_caen792ui.cpp: module/caen792ui.h \
 		include/hexspinbox.h \
 		include/baseui.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/caen792ui.h -o moc_caen792ui.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/caen792ui.h -o moc_caen792ui.cpp
 
 moc_inttodoubleplugin.cpp: plugin/aux/inttodoubleplugin.h \
 		include/baseplugin.h \
@@ -779,7 +779,7 @@ moc_inttodoubleplugin.cpp: plugin/aux/inttodoubleplugin.h \
 		include/pluginconnector.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/aux/inttodoubleplugin.h -o moc_inttodoubleplugin.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/aux/inttodoubleplugin.h -o moc_inttodoubleplugin.cpp
 
 moc_pulsing.cpp: plugin/aux/pulsing.h \
 		include/baseplugin.h \
@@ -792,7 +792,7 @@ moc_pulsing.cpp: plugin/aux/pulsing.h \
 		include/abstractmodule.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/aux/pulsing.h -o moc_pulsing.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/aux/pulsing.h -o moc_pulsing.cpp
 
 moc_multiplecachehistogramplugin.cpp: plugin/cache/multiplecachehistogramplugin.h \
 		include/baseplugin.h \
@@ -806,7 +806,7 @@ moc_multiplecachehistogramplugin.cpp: plugin/cache/multiplecachehistogramplugin.
 		include/samdsp.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/cache/multiplecachehistogramplugin.h -o moc_multiplecachehistogramplugin.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/cache/multiplecachehistogramplugin.h -o moc_multiplecachehistogramplugin.cpp
 
 moc_eventbuilderBIGROOTplugin.cpp: plugin/pack/eventbuilderBIGROOTplugin.h \
 		include/baseplugin.h \
@@ -816,69 +816,70 @@ moc_eventbuilderBIGROOTplugin.cpp: plugin/pack/eventbuilderBIGROOTplugin.h \
 		include/runmanager.h \
 		include/pluginmanager.h \
 		include/pluginconnectorqueued.h \
-		/snap/root-framework/943/usr/local/include/TFile.h \
-		/snap/root-framework/943/usr/local/include/Compression.h \
-		/snap/root-framework/943/usr/local/include/RtypesCore.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RConfig.hxx \
-		/snap/root-framework/943/usr/local/include/RVersion.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RVersion.hxx \
-		/snap/root-framework/943/usr/local/include/RConfigure.h \
-		/snap/root-framework/943/usr/local/include/DllImport.h \
-		/snap/root-framework/943/usr/local/include/TDirectoryFile.h \
-		/snap/root-framework/943/usr/local/include/TDirectory.h \
-		/snap/root-framework/943/usr/local/include/TNamed.h \
-		/snap/root-framework/943/usr/local/include/TObject.h \
-		/snap/root-framework/943/usr/local/include/Rtypes.h \
-		/snap/root-framework/943/usr/local/include/strtok.h \
-		/snap/root-framework/943/usr/local/include/strlcpy.h \
-		/snap/root-framework/943/usr/local/include/snprintf.h \
-		/snap/root-framework/943/usr/local/include/TGenericClassInfo.h \
-		/snap/root-framework/943/usr/local/include/TSchemaHelper.h \
-		/snap/root-framework/943/usr/local/include/TIsAProxy.h \
-		/snap/root-framework/943/usr/local/include/TVirtualIsAProxy.h \
-		/snap/root-framework/943/usr/local/include/TStorage.h \
-		/snap/root-framework/943/usr/local/include/TVersionCheck.h \
-		/snap/root-framework/943/usr/local/include/TString.h \
-		/snap/root-framework/943/usr/local/include/TMathBase.h \
-		/snap/root-framework/943/usr/local/include/ROOT/TypeTraits.hxx \
-		/snap/root-framework/943/usr/local/include/TClass.h \
-		/snap/root-framework/943/usr/local/include/TDictionary.h \
-		/snap/root-framework/943/usr/local/include/ESTLType.h \
-		/snap/root-framework/943/usr/local/include/TObjArray.h \
-		/snap/root-framework/943/usr/local/include/TSeqCollection.h \
-		/snap/root-framework/943/usr/local/include/TCollection.h \
-		/snap/root-framework/943/usr/local/include/TIterator.h \
-		/snap/root-framework/943/usr/local/include/TVirtualRWMutex.h \
-		/snap/root-framework/943/usr/local/include/TVirtualMutex.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RRangeCast.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/RSpan.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/span.hxx \
-		/snap/root-framework/943/usr/local/include/TUUID.h \
-		/snap/root-framework/943/usr/local/include/TList.h \
-		/snap/root-framework/943/usr/local/include/TBuffer.h \
-		/snap/root-framework/943/usr/local/include/TDataType.h \
-		/snap/root-framework/943/usr/local/include/Bytes.h \
-		/snap/root-framework/943/usr/local/include/Byteswap.h \
-		/snap/root-framework/943/usr/local/include/TDatime.h \
-		/snap/root-framework/943/usr/local/include/TUrl.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RConcurrentHashColl.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/TRWSpinLock.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/TSpinMutex.hxx \
-		/snap/root-framework/943/usr/local/include/TTree.h \
-		/snap/root-framework/943/usr/local/include/ROOT/TIOFeatures.hxx \
-		/snap/root-framework/943/usr/local/include/TArrayD.h \
-		/snap/root-framework/943/usr/local/include/TArray.h \
-		/snap/root-framework/943/usr/local/include/TArrayI.h \
-		/snap/root-framework/943/usr/local/include/TAttFill.h \
-		/snap/root-framework/943/usr/local/include/TAttLine.h \
-		/snap/root-framework/943/usr/local/include/TAttMarker.h \
-		/snap/root-framework/943/usr/local/include/TVirtualTreePlayer.h \
-		/snap/root-framework/943/usr/local/include/TBranch.h \
-		/snap/root-framework/943/usr/local/include/TBranchCacheInfo.h \
-		/snap/root-framework/943/usr/local/include/TBits.h \
+		/snap/root-framework/952/usr/local/include/TFile.h \
+		/snap/root-framework/952/usr/local/include/Compression.h \
+		/snap/root-framework/952/usr/local/include/RtypesCore.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RConfig.hxx \
+		/snap/root-framework/952/usr/local/include/RVersion.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RVersion.hxx \
+		/snap/root-framework/952/usr/local/include/RConfigure.h \
+		/snap/root-framework/952/usr/local/include/DllImport.h \
+		/snap/root-framework/952/usr/local/include/TDirectoryFile.h \
+		/snap/root-framework/952/usr/local/include/TDirectory.h \
+		/snap/root-framework/952/usr/local/include/TNamed.h \
+		/snap/root-framework/952/usr/local/include/TObject.h \
+		/snap/root-framework/952/usr/local/include/Rtypes.h \
+		/snap/root-framework/952/usr/local/include/strtok.h \
+		/snap/root-framework/952/usr/local/include/strlcpy.h \
+		/snap/root-framework/952/usr/local/include/snprintf.h \
+		/snap/root-framework/952/usr/local/include/TGenericClassInfo.h \
+		/snap/root-framework/952/usr/local/include/TSchemaHelper.h \
+		/snap/root-framework/952/usr/local/include/TIsAProxy.h \
+		/snap/root-framework/952/usr/local/include/TVirtualIsAProxy.h \
+		/snap/root-framework/952/usr/local/include/TStorage.h \
+		/snap/root-framework/952/usr/local/include/TVersionCheck.h \
+		/snap/root-framework/952/usr/local/include/TString.h \
+		/snap/root-framework/952/usr/local/include/TMathBase.h \
+		/snap/root-framework/952/usr/local/include/ROOT/TypeTraits.hxx \
+		/snap/root-framework/952/usr/local/include/TClass.h \
+		/snap/root-framework/952/usr/local/include/TDictionary.h \
+		/snap/root-framework/952/usr/local/include/ESTLType.h \
+		/snap/root-framework/952/usr/local/include/TSchemaRule.h \
+		/snap/root-framework/952/usr/local/include/TObjArray.h \
+		/snap/root-framework/952/usr/local/include/TSeqCollection.h \
+		/snap/root-framework/952/usr/local/include/TCollection.h \
+		/snap/root-framework/952/usr/local/include/TIterator.h \
+		/snap/root-framework/952/usr/local/include/TVirtualRWMutex.h \
+		/snap/root-framework/952/usr/local/include/TVirtualMutex.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RRangeCast.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/RSpan.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/span.hxx \
+		/snap/root-framework/952/usr/local/include/TUUID.h \
+		/snap/root-framework/952/usr/local/include/TList.h \
+		/snap/root-framework/952/usr/local/include/TBuffer.h \
+		/snap/root-framework/952/usr/local/include/TDataType.h \
+		/snap/root-framework/952/usr/local/include/Bytes.h \
+		/snap/root-framework/952/usr/local/include/Byteswap.h \
+		/snap/root-framework/952/usr/local/include/TDatime.h \
+		/snap/root-framework/952/usr/local/include/TUrl.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RConcurrentHashColl.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/TRWSpinLock.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/TSpinMutex.hxx \
+		/snap/root-framework/952/usr/local/include/TTree.h \
+		/snap/root-framework/952/usr/local/include/ROOT/TIOFeatures.hxx \
+		/snap/root-framework/952/usr/local/include/TArrayD.h \
+		/snap/root-framework/952/usr/local/include/TArray.h \
+		/snap/root-framework/952/usr/local/include/TArrayI.h \
+		/snap/root-framework/952/usr/local/include/TAttFill.h \
+		/snap/root-framework/952/usr/local/include/TAttLine.h \
+		/snap/root-framework/952/usr/local/include/TAttMarker.h \
+		/snap/root-framework/952/usr/local/include/TVirtualTreePlayer.h \
+		/snap/root-framework/952/usr/local/include/TBranch.h \
+		/snap/root-framework/952/usr/local/include/TBranchCacheInfo.h \
+		/snap/root-framework/952/usr/local/include/TBits.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/pack/eventbuilderBIGROOTplugin.h -o moc_eventbuilderBIGROOTplugin.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/pack/eventbuilderBIGROOTplugin.h -o moc_eventbuilderBIGROOTplugin.cpp
 
 moc_eventbuilderBIGplugin.cpp: plugin/pack/eventbuilderBIGplugin.h \
 		include/baseplugin.h \
@@ -890,7 +891,7 @@ moc_eventbuilderBIGplugin.cpp: plugin/pack/eventbuilderBIGplugin.h \
 		include/pluginconnectorqueued.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/pack/eventbuilderBIGplugin.h -o moc_eventbuilderBIGplugin.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/pack/eventbuilderBIGplugin.h -o moc_eventbuilderBIGplugin.cpp
 
 moc_mtdc32Processor.cpp: plugin/processing/mtdc32Processor.h \
 		include/abstractmodule.h \
@@ -902,7 +903,7 @@ moc_mtdc32Processor.cpp: plugin/processing/mtdc32Processor.h \
 		module/mesytec_mtdc_32_v2.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/processing/mtdc32Processor.h -o moc_mtdc32Processor.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/processing/mtdc32Processor.h -o moc_mtdc32Processor.cpp
 
 moc_madc32Processor.cpp: plugin/processing/madc32Processor.h \
 		include/abstractmodule.h \
@@ -914,7 +915,7 @@ moc_madc32Processor.cpp: plugin/processing/madc32Processor.h \
 		module/mesytec_madc_32_v2.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/processing/madc32Processor.h -o moc_madc32Processor.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/processing/madc32Processor.h -o moc_madc32Processor.cpp
 
 moc_mesytecMadc32module.cpp: module/mesytecMadc32module.h \
 		include/basemodule.h \
@@ -932,7 +933,7 @@ moc_mesytecMadc32module.cpp: module/mesytecMadc32module.h \
 		include/modulemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMadc32module.h -o moc_mesytecMadc32module.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMadc32module.h -o moc_mesytecMadc32module.cpp
 
 moc_mesytecMadc32ui.cpp: module/mesytecMadc32ui.h \
 		include/plot2d.h \
@@ -943,7 +944,7 @@ moc_mesytecMadc32ui.cpp: module/mesytecMadc32ui.h \
 		include/baseui.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMadc32ui.h -o moc_mesytecMadc32ui.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMadc32ui.h -o moc_mesytecMadc32ui.cpp
 
 moc_mesytecMtdc32module.cpp: module/mesytecMtdc32module.h \
 		include/basemodule.h \
@@ -961,7 +962,7 @@ moc_mesytecMtdc32module.cpp: module/mesytecMtdc32module.h \
 		include/modulemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMtdc32module.h -o moc_mesytecMtdc32module.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMtdc32module.h -o moc_mesytecMtdc32module.cpp
 
 moc_mesytecMtdc32ui.cpp: module/mesytecMtdc32ui.h \
 		include/plot2d.h \
@@ -972,7 +973,7 @@ moc_mesytecMtdc32ui.cpp: module/mesytecMtdc32ui.h \
 		include/baseui.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMtdc32ui.h -o moc_mesytecMtdc32ui.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include module/mesytecMtdc32ui.h -o moc_mesytecMtdc32ui.cpp
 
 moc_MatrixPlotWalk.cpp: plugin/cache/MatrixPlotWalk.h \
 		include/2Ddisplay.h \
@@ -985,7 +986,7 @@ moc_MatrixPlotWalk.cpp: plugin/cache/MatrixPlotWalk.h \
 		include/pluginconnectorqueued.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/943/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/cache/MatrixPlotWalk.h -o moc_MatrixPlotWalk.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/denis/IFIN_practica/gecko-light/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/denis/IFIN_practica/gecko-light -I/home/denis/IFIN_practica/gecko-light/include -I/home/denis/IFIN_practica/gecko-light/lib/sis3100_calls -I/snap/root-framework/952/usr/local/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plugin/cache/MatrixPlotWalk.h -o moc_MatrixPlotWalk.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1040,54 +1041,55 @@ main.o: core/main.cpp include/scopemainwindow.h \
 		include/runmanager.h \
 		include/abstractinterface.h \
 		include/geckoremote.h \
-		/snap/root-framework/943/usr/local/include/TROOT.h \
-		/snap/root-framework/943/usr/local/include/TDirectory.h \
-		/snap/root-framework/943/usr/local/include/TNamed.h \
-		/snap/root-framework/943/usr/local/include/TObject.h \
-		/snap/root-framework/943/usr/local/include/Rtypes.h \
-		/snap/root-framework/943/usr/local/include/RtypesCore.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RConfig.hxx \
-		/snap/root-framework/943/usr/local/include/RVersion.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RVersion.hxx \
-		/snap/root-framework/943/usr/local/include/RConfigure.h \
-		/snap/root-framework/943/usr/local/include/DllImport.h \
-		/snap/root-framework/943/usr/local/include/strtok.h \
-		/snap/root-framework/943/usr/local/include/strlcpy.h \
-		/snap/root-framework/943/usr/local/include/snprintf.h \
-		/snap/root-framework/943/usr/local/include/TGenericClassInfo.h \
-		/snap/root-framework/943/usr/local/include/TSchemaHelper.h \
-		/snap/root-framework/943/usr/local/include/TIsAProxy.h \
-		/snap/root-framework/943/usr/local/include/TVirtualIsAProxy.h \
-		/snap/root-framework/943/usr/local/include/TStorage.h \
-		/snap/root-framework/943/usr/local/include/TVersionCheck.h \
-		/snap/root-framework/943/usr/local/include/TString.h \
-		/snap/root-framework/943/usr/local/include/TMathBase.h \
-		/snap/root-framework/943/usr/local/include/ROOT/TypeTraits.hxx \
-		/snap/root-framework/943/usr/local/include/TClass.h \
-		/snap/root-framework/943/usr/local/include/TDictionary.h \
-		/snap/root-framework/943/usr/local/include/ESTLType.h \
-		/snap/root-framework/943/usr/local/include/TObjArray.h \
-		/snap/root-framework/943/usr/local/include/TSeqCollection.h \
-		/snap/root-framework/943/usr/local/include/TCollection.h \
-		/snap/root-framework/943/usr/local/include/TIterator.h \
-		/snap/root-framework/943/usr/local/include/TVirtualRWMutex.h \
-		/snap/root-framework/943/usr/local/include/TVirtualMutex.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RRangeCast.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/RSpan.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/span.hxx \
-		/snap/root-framework/943/usr/local/include/TUUID.h \
-		/snap/root-framework/943/usr/local/include/TList.h \
-		/snap/root-framework/943/usr/local/include/TBuffer.h \
-		/snap/root-framework/943/usr/local/include/TDataType.h \
-		/snap/root-framework/943/usr/local/include/Bytes.h \
-		/snap/root-framework/943/usr/local/include/Byteswap.h \
-		/snap/root-framework/943/usr/local/include/TApplication.h \
-		/snap/root-framework/943/usr/local/include/TQObject.h \
-		/snap/root-framework/943/usr/local/include/TVirtualQConnection.h \
-		/snap/root-framework/943/usr/local/include/TInterpreter.h \
-		/snap/root-framework/943/usr/local/include/TInterpreterValue.h \
-		/snap/root-framework/943/usr/local/include/TQClass.h \
-		/snap/root-framework/943/usr/local/include/TApplicationImp.h
+		/snap/root-framework/952/usr/local/include/TROOT.h \
+		/snap/root-framework/952/usr/local/include/TDirectory.h \
+		/snap/root-framework/952/usr/local/include/TNamed.h \
+		/snap/root-framework/952/usr/local/include/TObject.h \
+		/snap/root-framework/952/usr/local/include/Rtypes.h \
+		/snap/root-framework/952/usr/local/include/RtypesCore.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RConfig.hxx \
+		/snap/root-framework/952/usr/local/include/RVersion.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RVersion.hxx \
+		/snap/root-framework/952/usr/local/include/RConfigure.h \
+		/snap/root-framework/952/usr/local/include/DllImport.h \
+		/snap/root-framework/952/usr/local/include/strtok.h \
+		/snap/root-framework/952/usr/local/include/strlcpy.h \
+		/snap/root-framework/952/usr/local/include/snprintf.h \
+		/snap/root-framework/952/usr/local/include/TGenericClassInfo.h \
+		/snap/root-framework/952/usr/local/include/TSchemaHelper.h \
+		/snap/root-framework/952/usr/local/include/TIsAProxy.h \
+		/snap/root-framework/952/usr/local/include/TVirtualIsAProxy.h \
+		/snap/root-framework/952/usr/local/include/TStorage.h \
+		/snap/root-framework/952/usr/local/include/TVersionCheck.h \
+		/snap/root-framework/952/usr/local/include/TString.h \
+		/snap/root-framework/952/usr/local/include/TMathBase.h \
+		/snap/root-framework/952/usr/local/include/ROOT/TypeTraits.hxx \
+		/snap/root-framework/952/usr/local/include/TClass.h \
+		/snap/root-framework/952/usr/local/include/TDictionary.h \
+		/snap/root-framework/952/usr/local/include/ESTLType.h \
+		/snap/root-framework/952/usr/local/include/TSchemaRule.h \
+		/snap/root-framework/952/usr/local/include/TObjArray.h \
+		/snap/root-framework/952/usr/local/include/TSeqCollection.h \
+		/snap/root-framework/952/usr/local/include/TCollection.h \
+		/snap/root-framework/952/usr/local/include/TIterator.h \
+		/snap/root-framework/952/usr/local/include/TVirtualRWMutex.h \
+		/snap/root-framework/952/usr/local/include/TVirtualMutex.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RRangeCast.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/RSpan.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/span.hxx \
+		/snap/root-framework/952/usr/local/include/TUUID.h \
+		/snap/root-framework/952/usr/local/include/TList.h \
+		/snap/root-framework/952/usr/local/include/TBuffer.h \
+		/snap/root-framework/952/usr/local/include/TDataType.h \
+		/snap/root-framework/952/usr/local/include/Bytes.h \
+		/snap/root-framework/952/usr/local/include/Byteswap.h \
+		/snap/root-framework/952/usr/local/include/TApplication.h \
+		/snap/root-framework/952/usr/local/include/TQObject.h \
+		/snap/root-framework/952/usr/local/include/TVirtualQConnection.h \
+		/snap/root-framework/952/usr/local/include/TInterpreter.h \
+		/snap/root-framework/952/usr/local/include/TInterpreterValue.h \
+		/snap/root-framework/952/usr/local/include/TQClass.h \
+		/snap/root-framework/952/usr/local/include/TApplicationImp.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o core/main.cpp
 
 modulemanager.o: core/modulemanager.cpp include/modulemanager.h \
@@ -1312,66 +1314,67 @@ eventbuilderBIGROOTplugin.o: plugin/pack/eventbuilderBIGROOTplugin.cpp plugin/pa
 		include/runmanager.h \
 		include/pluginmanager.h \
 		include/pluginconnectorqueued.h \
-		/snap/root-framework/943/usr/local/include/TFile.h \
-		/snap/root-framework/943/usr/local/include/Compression.h \
-		/snap/root-framework/943/usr/local/include/RtypesCore.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RConfig.hxx \
-		/snap/root-framework/943/usr/local/include/RVersion.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RVersion.hxx \
-		/snap/root-framework/943/usr/local/include/RConfigure.h \
-		/snap/root-framework/943/usr/local/include/DllImport.h \
-		/snap/root-framework/943/usr/local/include/TDirectoryFile.h \
-		/snap/root-framework/943/usr/local/include/TDirectory.h \
-		/snap/root-framework/943/usr/local/include/TNamed.h \
-		/snap/root-framework/943/usr/local/include/TObject.h \
-		/snap/root-framework/943/usr/local/include/Rtypes.h \
-		/snap/root-framework/943/usr/local/include/strtok.h \
-		/snap/root-framework/943/usr/local/include/strlcpy.h \
-		/snap/root-framework/943/usr/local/include/snprintf.h \
-		/snap/root-framework/943/usr/local/include/TGenericClassInfo.h \
-		/snap/root-framework/943/usr/local/include/TSchemaHelper.h \
-		/snap/root-framework/943/usr/local/include/TIsAProxy.h \
-		/snap/root-framework/943/usr/local/include/TVirtualIsAProxy.h \
-		/snap/root-framework/943/usr/local/include/TStorage.h \
-		/snap/root-framework/943/usr/local/include/TVersionCheck.h \
-		/snap/root-framework/943/usr/local/include/TString.h \
-		/snap/root-framework/943/usr/local/include/TMathBase.h \
-		/snap/root-framework/943/usr/local/include/ROOT/TypeTraits.hxx \
-		/snap/root-framework/943/usr/local/include/TClass.h \
-		/snap/root-framework/943/usr/local/include/TDictionary.h \
-		/snap/root-framework/943/usr/local/include/ESTLType.h \
-		/snap/root-framework/943/usr/local/include/TObjArray.h \
-		/snap/root-framework/943/usr/local/include/TSeqCollection.h \
-		/snap/root-framework/943/usr/local/include/TCollection.h \
-		/snap/root-framework/943/usr/local/include/TIterator.h \
-		/snap/root-framework/943/usr/local/include/TVirtualRWMutex.h \
-		/snap/root-framework/943/usr/local/include/TVirtualMutex.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RRangeCast.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/RSpan.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/span.hxx \
-		/snap/root-framework/943/usr/local/include/TUUID.h \
-		/snap/root-framework/943/usr/local/include/TList.h \
-		/snap/root-framework/943/usr/local/include/TBuffer.h \
-		/snap/root-framework/943/usr/local/include/TDataType.h \
-		/snap/root-framework/943/usr/local/include/Bytes.h \
-		/snap/root-framework/943/usr/local/include/Byteswap.h \
-		/snap/root-framework/943/usr/local/include/TDatime.h \
-		/snap/root-framework/943/usr/local/include/TUrl.h \
-		/snap/root-framework/943/usr/local/include/ROOT/RConcurrentHashColl.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/TRWSpinLock.hxx \
-		/snap/root-framework/943/usr/local/include/ROOT/TSpinMutex.hxx \
-		/snap/root-framework/943/usr/local/include/TTree.h \
-		/snap/root-framework/943/usr/local/include/ROOT/TIOFeatures.hxx \
-		/snap/root-framework/943/usr/local/include/TArrayD.h \
-		/snap/root-framework/943/usr/local/include/TArray.h \
-		/snap/root-framework/943/usr/local/include/TArrayI.h \
-		/snap/root-framework/943/usr/local/include/TAttFill.h \
-		/snap/root-framework/943/usr/local/include/TAttLine.h \
-		/snap/root-framework/943/usr/local/include/TAttMarker.h \
-		/snap/root-framework/943/usr/local/include/TVirtualTreePlayer.h \
-		/snap/root-framework/943/usr/local/include/TBranch.h \
-		/snap/root-framework/943/usr/local/include/TBranchCacheInfo.h \
-		/snap/root-framework/943/usr/local/include/TBits.h
+		/snap/root-framework/952/usr/local/include/TFile.h \
+		/snap/root-framework/952/usr/local/include/Compression.h \
+		/snap/root-framework/952/usr/local/include/RtypesCore.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RConfig.hxx \
+		/snap/root-framework/952/usr/local/include/RVersion.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RVersion.hxx \
+		/snap/root-framework/952/usr/local/include/RConfigure.h \
+		/snap/root-framework/952/usr/local/include/DllImport.h \
+		/snap/root-framework/952/usr/local/include/TDirectoryFile.h \
+		/snap/root-framework/952/usr/local/include/TDirectory.h \
+		/snap/root-framework/952/usr/local/include/TNamed.h \
+		/snap/root-framework/952/usr/local/include/TObject.h \
+		/snap/root-framework/952/usr/local/include/Rtypes.h \
+		/snap/root-framework/952/usr/local/include/strtok.h \
+		/snap/root-framework/952/usr/local/include/strlcpy.h \
+		/snap/root-framework/952/usr/local/include/snprintf.h \
+		/snap/root-framework/952/usr/local/include/TGenericClassInfo.h \
+		/snap/root-framework/952/usr/local/include/TSchemaHelper.h \
+		/snap/root-framework/952/usr/local/include/TIsAProxy.h \
+		/snap/root-framework/952/usr/local/include/TVirtualIsAProxy.h \
+		/snap/root-framework/952/usr/local/include/TStorage.h \
+		/snap/root-framework/952/usr/local/include/TVersionCheck.h \
+		/snap/root-framework/952/usr/local/include/TString.h \
+		/snap/root-framework/952/usr/local/include/TMathBase.h \
+		/snap/root-framework/952/usr/local/include/ROOT/TypeTraits.hxx \
+		/snap/root-framework/952/usr/local/include/TClass.h \
+		/snap/root-framework/952/usr/local/include/TDictionary.h \
+		/snap/root-framework/952/usr/local/include/ESTLType.h \
+		/snap/root-framework/952/usr/local/include/TSchemaRule.h \
+		/snap/root-framework/952/usr/local/include/TObjArray.h \
+		/snap/root-framework/952/usr/local/include/TSeqCollection.h \
+		/snap/root-framework/952/usr/local/include/TCollection.h \
+		/snap/root-framework/952/usr/local/include/TIterator.h \
+		/snap/root-framework/952/usr/local/include/TVirtualRWMutex.h \
+		/snap/root-framework/952/usr/local/include/TVirtualMutex.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RRangeCast.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/RSpan.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/span.hxx \
+		/snap/root-framework/952/usr/local/include/TUUID.h \
+		/snap/root-framework/952/usr/local/include/TList.h \
+		/snap/root-framework/952/usr/local/include/TBuffer.h \
+		/snap/root-framework/952/usr/local/include/TDataType.h \
+		/snap/root-framework/952/usr/local/include/Bytes.h \
+		/snap/root-framework/952/usr/local/include/Byteswap.h \
+		/snap/root-framework/952/usr/local/include/TDatime.h \
+		/snap/root-framework/952/usr/local/include/TUrl.h \
+		/snap/root-framework/952/usr/local/include/ROOT/RConcurrentHashColl.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/TRWSpinLock.hxx \
+		/snap/root-framework/952/usr/local/include/ROOT/TSpinMutex.hxx \
+		/snap/root-framework/952/usr/local/include/TTree.h \
+		/snap/root-framework/952/usr/local/include/ROOT/TIOFeatures.hxx \
+		/snap/root-framework/952/usr/local/include/TArrayD.h \
+		/snap/root-framework/952/usr/local/include/TArray.h \
+		/snap/root-framework/952/usr/local/include/TArrayI.h \
+		/snap/root-framework/952/usr/local/include/TAttFill.h \
+		/snap/root-framework/952/usr/local/include/TAttLine.h \
+		/snap/root-framework/952/usr/local/include/TAttMarker.h \
+		/snap/root-framework/952/usr/local/include/TVirtualTreePlayer.h \
+		/snap/root-framework/952/usr/local/include/TBranch.h \
+		/snap/root-framework/952/usr/local/include/TBranchCacheInfo.h \
+		/snap/root-framework/952/usr/local/include/TBits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o eventbuilderBIGROOTplugin.o plugin/pack/eventbuilderBIGROOTplugin.cpp
 
 eventbuilderBIGplugin.o: plugin/pack/eventbuilderBIGplugin.cpp plugin/pack/eventbuilderBIGplugin.h \
