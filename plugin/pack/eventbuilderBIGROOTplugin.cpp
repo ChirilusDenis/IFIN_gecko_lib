@@ -998,6 +998,12 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
             for (uint16_t param = 1; param < detchan[conf_entry].size() - 1; param++) {
                 read_channel = detchan[conf_entry][param];
 
+                // Make sure the read channel actually exists
+                if (read_channel >= nofInputs) {
+                    printf("EventbuilderBIGROOT: Channel value over number of inputs");
+                    break;
+                }
+
                 // Check if there is any remaining data to read on any channel
                 if (data[read_channel].size() >= read_idx[read_channel] + 2) {
                     hasData = true;
@@ -1021,6 +1027,12 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
             for (uint16_t param = 1; param < detchan[conf_entry].size() - 1; param++) {
 
                 read_channel = detchan[conf_entry][param];
+
+                // Make sure the read channel actually exists
+                if (read_channel >= nofInputs) {
+                    printf("EventbuilderBIGROOT: Channel value over number of inputs");
+                    break;
+                }
 
                 if (data[read_channel].size() >= read_idx[read_channel] + 2) {
                     if (data[read_channel][read_idx[read_channel] + 1] < (leastTime + offset)) {
