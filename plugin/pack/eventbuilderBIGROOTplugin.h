@@ -60,6 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TFile.h>
 #include <TTree.h>
 #include <string.h>
+#include <TTimeStamp.h>
 
 class BasePlugin;
 
@@ -239,6 +240,8 @@ private:
 
     uint16_t *read_idx = NULL; // used to keep track of read entries from data
     uint16_t *write_idx = NULL; // used to keep track of the number of entries in each 'big' branch of the data_tree
+    // TDatime *crt_time = NULL;
+    TTimeStamp *time = NULL;
 
     // TODO
     // std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};

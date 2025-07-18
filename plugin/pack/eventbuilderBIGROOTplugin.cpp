@@ -135,6 +135,9 @@ EventBuilderBIGROOTPlugin::~EventBuilderBIGROOTPlugin()
         delete[] data_tree;
     }
 
+    // delete crt_time;
+    delete time;
+
     // DEBUG
     printf("Deconstructor done.\n");
 }
@@ -360,7 +363,6 @@ void EventBuilderBIGROOTPlugin::updateRunName() {
     currentFileNameLabel->setText(Qfilename);
 }
 
-// ???
 void EventBuilderBIGROOTPlugin::throwLastCache()
 {
     //Write to logbook that the Run was stopped by the user
@@ -755,9 +757,6 @@ void EventBuilderBIGROOTPlugin::runStartingEvent(){
             std::cout << "Failed to run";
 
     // NEW
-    
-    // Create and intialise buffers for roottree
-    makeTreeBuffer();
 
     //Open new root file
     openNewFile();
@@ -786,7 +785,7 @@ QString EventBuilderBIGROOTPlugin::makeFileName() {
 
     //Construct the filename from the write path, the prefix, and the run number
     do{
-        Qfilename=tr("%1/%2%3")
+        Qfilename=tr("%1/%2%3.root")
                 .arg(writePath)
                 .arg(filePrefix)
                 .arg(current_file_number,3,10,QChar('0'));
@@ -860,8 +859,7 @@ void EventBuilderBIGROOTPlugin::openNewFile() {
 
         current_bytes_written = 0;
 
-        std::string filename = makeFileName().toStdString() + ".root";
-        rootfile = new TFile(filename.c_str(), "recreate");
+        rootfile = new TFile(makeFileName().toStdString().c_str(), "recreate");
         
         if ((rootfile == NULL) || !rootfile->IsOpen()) {
             printf("EventBuilderBIGROOT: ROOT file can not be created!");
@@ -879,6 +877,7 @@ void EventBuilderBIGROOTPlugin::openNewFile() {
             roottree = temp;
             roottree->SetDirectory(rootfile);
         } else {
+            if (data_tree == NULL) makeTreeBuffer();
             makeTTree();
         }
 
@@ -973,6 +972,7 @@ void EventBuilderBIGROOTPlugin::userProcess() {
 int EventBuilderBIGROOTPlugin::writeToTree() {\
     // DEBUG
     printf("Writting...\n");
+
     uint16_t read_channel, det_type_idx;
     uint32_t **big_branch;
     int local_bytes;
@@ -988,8 +988,14 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
     memset(read_idx, 0, nofInputs * sizeof(uint16_t));
     memset(write_idx, 0, typeNo * sizeof(uint16_t));
     
+
     // Filling up the data_tree with values from data
     do {
+
+        // Update current time
+        // crt_time->Set();
+        time->Set();
+
         hasData = false;
         leastTime = 0;
 
@@ -1071,9 +1077,14 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
 }
 
 // Create buffers for roottree
+// Should be called before makeTTree()
 void EventBuilderBIGROOTPlugin::makeTreeBuffer() {
     // DEBUG
     printf("Making buffers...\n");
+
+    // Make timestamp structure
+    // crt_time = new TDatime();
+    time = new TTimeStamp();
 
     uint32_t **big_branch = NULL;
 
@@ -1105,6 +1116,7 @@ void EventBuilderBIGROOTPlugin::makeTreeBuffer() {
 }
 
 // Create actual roottree
+// Should be called only after makeTreeBuffer()
 void EventBuilderBIGROOTPlugin::makeTTree() {
     // DEBUG
     printf("Making TTree...\n");
@@ -1119,12 +1131,15 @@ void EventBuilderBIGROOTPlugin::makeTTree() {
     // Setting limit so the ttree won't autosave to a file on its own
     roottree->SetMaxTreeSize(2 * number_of_mb * 1024 * 1024);
 
+    // Making time and date branch
+    // roottree->Branch("Timestamp", crt_time);
+    roottree->Branch("Timestamp", time);
+
     // Making branches and linking their buffers
     for (uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
         for (uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
 
-            // TODO
-            // name
+            // TODO name
 
             if (param == 0) branch_name = "Box" + std::to_string(type_idx + 1) + "_Index";
             else branch_name = "Box" + std::to_string(type_idx + 1) + "_Param_" + std::to_string(param);
