@@ -986,7 +986,6 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
     
     // Reseting reading and writing indexes
     memset(read_idx, 0, nofInputs * sizeof(uint16_t));
-    memset(write_idx, 0, typeNo * sizeof(uint16_t));
     
 
     // Filling up the data_tree with values from data
@@ -995,6 +994,7 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
         // Update current time
         // crt_time->Set();
         time->Set();
+        memset(write_idx, 0, typeNo * sizeof(uint16_t));
 
         hasData = false;
         leastTime = 0;
