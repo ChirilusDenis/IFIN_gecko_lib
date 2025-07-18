@@ -136,7 +136,7 @@ EventBuilderBIGROOTPlugin::~EventBuilderBIGROOTPlugin()
     }
 
     // delete crt_time;
-    delete time;
+    // delete time;
 
     // DEBUG
     printf("Deconstructor done.\n");
@@ -993,7 +993,7 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
 
         // Update current time
         // crt_time->Set();
-        time->Set();
+        // time->Set();
         memset(write_idx, 0, typeNo * sizeof(uint16_t));
 
         hasData = false;
@@ -1084,7 +1084,7 @@ void EventBuilderBIGROOTPlugin::makeTreeBuffer() {
 
     // Make timestamp structure
     // crt_time = new TDatime();
-    time = new TTimeStamp();
+    // time = new TTimeStamp();
 
     uint32_t **big_branch = NULL;
 
