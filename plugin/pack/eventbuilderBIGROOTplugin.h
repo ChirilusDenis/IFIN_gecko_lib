@@ -233,15 +233,16 @@ private:
     QVector<QVector<uint32_t> > dataTemp; // split data if reset happened
 
     // NEW
-    TFile *rootfile = NULL;
-    TTree *roottree = NULL; // TTree containing data to be written in the root files
+    TFile *rootfile = nullptr;
+    TTree *roottree = nullptr; // TTree containing data to be written in the root files
 
-    uint32_t ***data_tree = NULL; // used to make a move data from the input to the roottree
+    uint32_t ***data_tree = nullptr; // used to make a move data from the input to the roottree
 
-    uint16_t *read_idx = NULL; // used to keep track of read entries from data
-    uint16_t *write_idx = NULL; // used to keep track of the number of entries in each 'big' branch of the data_tree
-    // TDatime *crt_time = NULL;
-    // TTimeStamp *time = NULL;
+    uint16_t *read_idx = nullptr; // used to keep track of read entries from data
+    uint16_t *write_idx = nullptr; // used to keep track of the number of entries in each 'big' branch of the data_tree
+    
+    TDatime *trigger_time = nullptr;
+    // TTimeStamp *trigger_time = nullptr; // should be replaced due to overflow with tdatime if used around and after 18 Jan 2038
 
     // TODO
     // std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};
