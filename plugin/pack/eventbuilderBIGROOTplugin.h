@@ -60,7 +60,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TFile.h>
 #include <TTree.h>
 #include <string.h>
-#include <TTimeStamp.h>
 
 class BasePlugin;
 
@@ -215,34 +214,30 @@ signals:
 private:
     std::ofstream logbook;
     QDataStream out;
-    bool hasData;
-	uint32_t leastTime;
-    int nofInputs; // number of lines in data or dataTemp
+    int nofInputs; // Number of lines in data or dataTemp
 
-    int typeNo; // number of types (boxes)
-    int numberOfDet; // number of detectors = number of lines in the config file without the header
+    int typeNo; // Number of types (boxes)
+    int numberOfDet; // Number of detectors = number of lines in the config file without the header
     uint64_t nofTriggers;
     uint64_t lastNofTriggers;
-    std::vector <uint16_t> noDetType; // number of detectors that fired
-    std::vector <uint32_t> totalNoDet; // how many detectors on each type
-    std::vector <std::vector<uint32_t> > detchan; // config file lines without the header
+    std::vector <uint16_t> noDetType; // Number of detectors that fired
+    std::vector <uint32_t> totalNoDet; // Number of detectors from each type
+    std::vector <std::vector<uint32_t> > detchan; // Config file lines without the header
     QVector <int> typeParam;
     QVector <int> resetPosition;
-    QVector<QVector<uint32_t> > data; // input data
-                                    // for each channel: val timestamp val timestamp ...
-    QVector<QVector<uint32_t> > dataTemp; // split data if reset happened
+    QVector<QVector<uint32_t> > data; // Input data, for each channel: val timestamp val timestamp ...
+    QVector<QVector<uint32_t> > dataTemp; // Post reset data if reset happened
 
-    // NEW
-    TFile *rootfile = nullptr;
+
+    TFile *rootfile = nullptr; // TFile to be written to disk
     TTree *roottree = nullptr; // TTree containing data to be written in the root files
 
-    uint32_t ***data_tree = nullptr; // used to make a move data from the input to the roottree
+    uint32_t ***data_tree = nullptr; // Used to make a move data from the input to the roottree
 
-    uint16_t *read_idx = nullptr; // used to keep track of read entries from data
-    uint16_t *write_idx = nullptr; // used to keep track of the number of entries in each 'big' branch of the data_tree
+    uint16_t *read_idx = nullptr; // Used to keep track of read entries from data
+    uint16_t *write_idx = nullptr; // Used to keep track of the number of entries in each 'big' branch of the data_tree
     
-    TDatime *trigger_time = nullptr;
-    // TTimeStamp *trigger_time = nullptr; // should be replaced due to overflow with tdatime if used around and after 18 Jan 2038
+    TDatime trigger_time;
 
     // TODO
     // std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};

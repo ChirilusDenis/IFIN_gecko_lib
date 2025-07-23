@@ -10,5 +10,7 @@
         "variant": "cpp",
         "random": "cpp",
         "future": "cpp"
-    }
+    },
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": false
 }
