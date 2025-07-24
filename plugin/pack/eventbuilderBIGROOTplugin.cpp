@@ -359,7 +359,7 @@ void EventBuilderBIGROOTPlugin::throwLastCache()
 {
 	//Write to logbook that the Run was stopped by the user
 	QDateTime time=QDateTime::currentDateTime();
-	logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
+	logbook<<time.date().toString("dddd dd.MM.yyyy").toStdString()<<" ";
 	logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t";
 	logbook<<"Stopping "<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString()<<std::endl;
 	logbook<<"User stopped "<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString()<<"!"<<std::endl;
@@ -404,7 +404,7 @@ void EventBuilderBIGROOTPlugin::receiveInterfaceSignal(bool receivedBeamStatus)
 	{
 		//Write to logbook and change Manual Pulsing button text
 		QDateTime time=QDateTime::currentDateTime();
-		logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
+		logbook<<time.date().toString("dddd dd.MM.yyyy").toStdString()<<" ";
 		logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t";
 		if(!outputValue)
 		{
@@ -430,7 +430,7 @@ void EventBuilderBIGROOTPlugin::writeTrigger()
 {
 	//Write the average trigger rate to logbook
 	QDateTime time=QDateTime::currentDateTime();
-	logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
+	logbook<<time.date().toString("dddd dd.MM.yyyy").toStdString()<<" ";
 	logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t";
 	logbook<<1000*(nofTriggers-lastNofTriggers)/triggerToLogbook->interval()<<" average triggers/second in the last hour"<<std::endl;
 	lastNofTriggers=nofTriggers;
@@ -532,7 +532,7 @@ void EventBuilderBIGROOTPlugin::infoInput()
 			logbook.open ((tr("%1/%2").arg(writePath).arg("Logbook.txt")).toLatin1().data(),std::ofstream::out | std::ofstream::app);
 		}
 		QDateTime time=QDateTime::currentDateTime();
-		logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
+		logbook<<time.date().toString("dddd dd.MM.yyyy").toStdString()<<" ";
 		logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t"<<std::endl;
 		logbook<<"Target is: "<<target.toStdString()<<std::endl;
 		logbook<<"Projectile is: "<<projectile.toStdString()<<std::endl;
@@ -813,13 +813,13 @@ void EventBuilderBIGROOTPlugin::openNewFile() {
 		}
 
 		rootfile->Flush();
-		roottree->SetDirectory(nullptr); // Detach roottree from file, otherwise the TFile closure erases the TTree
+		roottree->SetDirectory(nullptr); // Detach roottree from TFile, otherwise the TFile closure erases the TTree
 		rootfile->Close();
 		delete rootfile;
 		rootfile = nullptr;
 
 		QDateTime time=QDateTime::currentDateTime();
-		logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
+		logbook<<time.date().toString("dddd dd.MM.yyyy").toStdString()<<" ";
 		logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t";
 		logbook<<"Stopping "<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString()<<std::endl;
 
@@ -837,33 +837,32 @@ void EventBuilderBIGROOTPlugin::openNewFile() {
 	// Check if the directory was opened or created 
 	if (outDir.exists()) {
 
+		current_bytes_written = 0;
+		rootfile = new TFile(makeFileName().toStdString().c_str(), "recreate");
+		
+		if ((rootfile == nullptr) || !rootfile->IsOpen()) {
+			std::cout<<"EventBuilderBIGROOT: ROOT file ";
+			std::cout<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString();
+			std::cout<<"could not be created.\n";
+			return;
+		}
+
 		// Update name on the UI
 		updateRunName();
 
 		//Write to logbook
 		QDateTime time=QDateTime::currentDateTime();
-		logbook<<time.date().toString("dddd dd:MM:yyyy").toStdString()<<" ";
+		logbook<<time.date().toString("dddd dd.MM.yyyy").toStdString()<<" ";
 		logbook<<time.time().toString("HH:mm:ss").toStdString()<<"\t\t";
-		logbook<<"Starting "<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString()<<std::endl;\
+		logbook<<"Starting "<<(tr("%1%2").arg(filePrefix).arg(current_file_number,3,10,QChar('0'))).toStdString()<<std::endl;
 
 		if(!scriptName.isEmpty())
 			if (!QProcess::startDetached("/bin/sh", QStringList{scriptName}))
 				std::cout << "Failed to run";
 
-		current_bytes_written = 0;
-
-		rootfile = new TFile(makeFileName().toStdString().c_str(), "recreate");
-		
-		if ((rootfile == nullptr) || !rootfile->IsOpen()) {
-			printf("EventBuilderBIGROOT: ROOT file can not be created!");
-			return;
-		}
-
-		// "Emptying" the root tree by copying it with 0 entries copied
-
 		// DEBUG
 		// printf("(Empty roottree...)");
-		
+		// "Emptying" the root tree by copying it with 0 entries copied
 		if (roottree != nullptr) {
 			roottree->Reset();
 			roottree->SetDirectory(rootfile);
@@ -873,8 +872,8 @@ void EventBuilderBIGROOTPlugin::openNewFile() {
 		}
 
 	} else {
-		//If the folder does not exist and could not be created, write it to the terminal
-	   printf("EventBuilderBIGROOT: The output directory does not exist and could not be created! (%s)\n",outDir.absolutePath().toStdString().c_str());
+		// If the folder does not exist and could not be created, write it to the terminal
+	   printf("EventBuilderBIGROOT: The output directory does not exist and could not be created! (%s)\n", outDir.absolutePath().toStdString().c_str());
    }
    // DEBUG
 //    printf("File done\n");
@@ -884,10 +883,10 @@ void EventBuilderBIGROOTPlugin::userProcess() {
 	// DEBUG
 	// printf("User process...\n");
 	
-	//If the configuration file is not read, write to prompt that there is a problem
+	// If the configuration file is not read, write to prompt that there is a problem
 	if(typeNo==0) std::cout<<"WRITING PROBLEM!! No detector configuration detected!!"<<std::endl;
 
-	//Initialize values and vectors. Largecheck and smallcheck are relevant to looking for events that are split by a timer reset
+	// Initialize values and vectors. Largecheck and smallcheck are relevant to looking for events that are split by a timer reset
 	bool hasReseted=0;
 	uint32_t largeCheck=1030000000;
 	uint32_t smallCheck=30000000;
@@ -946,7 +945,7 @@ void EventBuilderBIGROOTPlugin::userProcess() {
 	// Start reconstructing the events
 	writeToTree();
 
-	//If the timer has reset, start reconstructing the events after the reset
+	// If the timer has reset, start reconstructing the events after the reset
 	if(hasReseted)
 	{
 		for(int i=0;i<nofInputs;i++)
@@ -959,8 +958,8 @@ void EventBuilderBIGROOTPlugin::userProcess() {
 	// printf("User done\n");
 }
 
-// Moving data from data to roottree buffers
-int EventBuilderBIGROOTPlugin::writeToTree() {\
+// Moving data from data to roottree buffers and writing an entry to the roottree
+int EventBuilderBIGROOTPlugin::writeToTree() {
 	// DEBUG
 	// printf("Writting...\n");
 	if (roottree == nullptr || data_tree == nullptr) {
@@ -997,7 +996,7 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
 
 				// Make sure the read channel actually exists
 				if (read_channel >= nofInputs) {
-					printf("EventbuilderBIGROOT: Channel value over number of inputs");
+					printf("EventbuilderBIGROOT: Channel value over number of inputs.\n");
 					break;
 				}
 
@@ -1026,7 +1025,7 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
 
 				// Make sure the read channel actually exists
 				if (read_channel >= nofInputs) {
-					printf("EventbuilderBIGROOT: Channel value over number of inputs");
+					printf("EventbuilderBIGROOT: Channel value over number of inputs.\n");
 					break;
 				}
 
@@ -1049,7 +1048,7 @@ int EventBuilderBIGROOTPlugin::writeToTree() {\
 		local_bytes = roottree->Fill(); // Fill() returns the number of bytes committed to memory
 
 		if (local_bytes < 0) { // Some filling error ocurred
-			printf("EventBuilderBIGROOT: Error while writing to roottree!\n");
+			printf("EventBuilderBIGROOT: Error while writing to roottree.\n");
 			break;
 		}
 
@@ -1083,7 +1082,7 @@ void EventBuilderBIGROOTPlugin::makeTreeBuffer() {
 
 		data_tree[type_idx] = (uint32_t **)calloc(typeParam[type_idx] + 1, sizeof(uint32_t *));
 
-		// Make 'sub' branches for each 'big' branch; oen sub branch for each det index & channel data
+		// Make 'sub' branches for each 'big' branch; open sub branch for each det index & channel data
 		for (uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
 
 			// Make space for future data
@@ -1112,7 +1111,7 @@ void EventBuilderBIGROOTPlugin::makeTTree() {
 	roottree->SetMaxTreeSize(2 * number_of_mb * 1024 * 1024);
 
 	// Making time and date branch
-	roottree->Branch("triggerTime", &trigger_time);
+	roottree->Branch("Trigger_time", &trigger_time);
 
 	// DEBUG
 	// trigger_time.Set();
@@ -1142,6 +1141,8 @@ void EventBuilderBIGROOTPlugin::makeTTree() {
 	//         memset(data_tree[type_idx][param], 0xFF, totalNoDet[type_idx + 1] * sizeof(uint32_t));
 	//     }
 	// }
+	// sleep(60);
+	// trigger_time.Set();
 	// roottree->Fill();
 
 
