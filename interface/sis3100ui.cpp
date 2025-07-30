@@ -80,7 +80,7 @@ QWidget* Sis3100UI::createButtons()
     layout->addWidget(opencloseButton);
     layout->addWidget(resetButton);
     layout->addStretch(10);
-    layout->setMargin(1);
+    layout->setContentsMargins(1, 1, 1, 1);
 
     buttons->setLayout(layout);
 
@@ -97,7 +97,7 @@ QWidget* Sis3100UI::createStatusView()
     statusViewTextEdit->setReadOnly(true);
 
     layout->addWidget(statusViewTextEdit);
-    layout->setMargin(1);
+    layout->setContentsMargins(1, 1, 1, 1);
 
     statusView->setLayout(layout);
 

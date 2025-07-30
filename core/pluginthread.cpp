@@ -231,7 +231,7 @@ void PluginThread::execProcessList()
             QFutureSynchronizer<void> fsync;
             foreach(AbstractPlugin* p, *i)
             {
-                fsync.addFuture(QtConcurrent::run(p, &AbstractPlugin::process));
+                fsync.addFuture(QtConcurrent::run([p]() { p->process(); }));
             }
         }
         else

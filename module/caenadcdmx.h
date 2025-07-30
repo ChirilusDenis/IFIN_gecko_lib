@@ -31,7 +31,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Event;
 class EventSlot;
 class AbstractModule;
-template <typename T> class QVector;
 
 #define CAEN_V792_V775_EVENT_LENGTH 34
 #define CAEN_V792_V775_NOF_CHANNELS 32

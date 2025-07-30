@@ -29,7 +29,7 @@ class HexSpinBox : public QSpinBox {
 public:
     HexSpinBox (QWidget *p)
     : QSpinBox (p)
-    , v_ (new QRegExpValidator (QRegExp ("[0-9a-fA-F]+"), this))
+    , v_ (new QRegularExpressionValidator (QRegularExpression ("[0-9a-fA-F]+"), this))
     {}
 protected:
     virtual QString textFromValue (int value) const {
@@ -58,7 +58,7 @@ protected:
         return state;
     }
 private:
-    QRegExpValidator *v_;
+    QRegularExpressionValidator *v_;
 };
 
 #endif // HEXSPINBOX_H

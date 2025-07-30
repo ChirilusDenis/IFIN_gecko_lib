@@ -35,7 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QGroupBox>
 #include <QLabel>
 #include <QTimer>
-#include <QTime>
+// #include <QTime>
+#include <QElapsedTimer>
 #include <QPalette>
 
 class Pulsing : public BasePlugin
@@ -88,7 +89,7 @@ protected:
     QPalette* stopStartPalette;
     QTimer* setInterfaceOutput;
     QTimer* updateInterfaceTimer;
-    QTime elapsedTime;
+    QElapsedTimer elapsedTime;
     QLabel* timeElapsedLabel;
 
     uint64_t pulsingTimeOn;

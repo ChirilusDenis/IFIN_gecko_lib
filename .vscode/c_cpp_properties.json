@@ -4,14 +4,13 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include/x86_64-linux-gnu/qt5/**",
-                "/snap/root-framework/943/usr/local/include/**",
-                "/snap/root-framework/943/usr/local/include"
+                "/usr/include/x86_64-linux-gnu/qt6/**",
+                "/snap/root-framework/952/usr/local/include/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
-            "cppStandard": "gnu++17",
+            "cppStandard": "gnu++20",
             "intelliSenseMode": "linux-gcc-x64"
         }
     ],

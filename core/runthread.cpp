@@ -143,8 +143,8 @@ void RunThread::run()
     if (stat == -1) perror("sched_setscheduler()");*/
 
     modules = *ModuleManager::ref ().list ();
-    triggers = ModuleManager::ref ().getTriggers ().toList ();
-    mandatories = ModuleManager::ref ().getMandatorySlots ().toList ();
+    triggers = ModuleManager::ref ().getTriggers ().values ();
+    mandatories = ModuleManager::ref ().getMandatorySlots ().values ();
     createConnections();
 
     recordStatus=1;
@@ -274,7 +274,7 @@ bool RunThread::acquire()
 
     acquisitionOngoing=0;
 
-    if (QSet<const EventSlot*>::fromList (mandatories).subtract(ev->getOccupiedSlots ()).empty()) {
+    if (QSet<const EventSlot*>(mandatories.begin(), mandatories.end()).subtract(ev->getOccupiedSlots ()).empty()) {
         if(forcedRead||recordStatus)
         {
             RunManager::ref ().getEventBuffer ()->queue (ev);

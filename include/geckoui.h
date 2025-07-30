@@ -87,7 +87,7 @@ public:
     {
         QWidget* c = new QWidget();
         QGridLayout* l = new QGridLayout;
-        l->setMargin(0);
+        l->setContentsMargins(0, 0, 0, 0);
         l->setVerticalSpacing(0);
         c->setLayout(l);
         int idx = tabs->addTab(c,_name);
@@ -115,7 +115,7 @@ public:
                 l = new QVBoxLayout;
             }
             //QGridLayout* l = new QGridLayout;
-            l->setMargin(0);
+            l->setContentsMargins(0, 0, 0, 0);
             l->setSpacing(0);
             b->setLayout(l);
             c->layout()->addWidget(b);
@@ -148,7 +148,7 @@ public:
                 l = new QVBoxLayout;
             }
             //QGridLayout* l = new QGridLayout;
-            l->setMargin(0);
+            l->setContentsMargins(0, 0, 0, 0);
             l->setSpacing(0);
             g->setLayout(l);
             g->setObjectName(identifier);
@@ -165,7 +165,7 @@ public:
             QWidget* g = groups.value(identifier);
             QGroupBox* b = new QGroupBox(_name,g);
             QGridLayout* l = new QGridLayout;
-            l->setMargin(0);
+            l->setContentsMargins(0, 0, 0, 0);
             l->setVerticalSpacing(0);
             b->setLayout(l);
             g->layout()->addWidget(b);
@@ -197,7 +197,7 @@ public:
             } else {
                 l = new QVBoxLayout;
             }
-            l->setMargin(0);
+            l->setContentsMargins(0, 0, 0, 0);
             l->setSpacing(0);
             b->setLayout(l);
             g->layout()->addWidget(b);
@@ -234,7 +234,7 @@ public:
             QWidget* g = groups.value(identifier);
             QWidget* b = new QWidget(g);
             QHBoxLayout* l = new QHBoxLayout;
-            l->setMargin(0);
+            l->setContentsMargins(0, 0, 0, 0);
             l->setSpacing(0);
             b->setLayout(l);
             g->layout()->addWidget(b);
@@ -387,7 +387,7 @@ public:
         QLabel* lbl = new QLabel(_label);
         QHBoxLayout* l = new QHBoxLayout();
         QWidget* ret = new QWidget();
-        l->setMargin(0);
+        l->setContentsMargins(0, 0, 0, 0);
         l->addWidget(lbl);
         l->addWidget(w);
         l->setSpacing(0);

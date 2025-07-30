@@ -40,7 +40,7 @@ MesytecMadc32UI::~MesytecMadc32UI(){}
 void MesytecMadc32UI::createUI()
 {
     QGridLayout* l = new QGridLayout;
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
     l->setVerticalSpacing(0);
 
     int nt = 0; // current tab number
@@ -329,7 +329,7 @@ void MesytecMadc32UI::createPreviewUI()
                     {
                         QGridLayout* lb = new QGridLayout();
                         lb->setSpacing(0);
-                        lb->setMargin(0);
+                        lb->setContentsMargins(0, 0, 0, 0);
                         energyValueDisplay[ch] = new QLabel();
                         timestampDisplay[ch] = new QLabel();
                         resolutionDisplay[ch] = new QLabel();
@@ -376,9 +376,10 @@ void MesytecMadc32UI::uiInput(QString _name)
     if(gb != 0)
     {
         if(_name.startsWith("enable_channel")) {
-            QRegExp reg("[0-9]{1,2}");
-            reg.indexIn(_name);
-            int ch = reg.cap().toInt();
+            QRegularExpression reg("[0-9]{1,2}");
+			QRegularExpressionMatch m = reg.match(_name);
+            int ch = -1;
+			if(m.hasMatch()) ch = m.captured(0).toInt();
             if(gb->isChecked()) module->conf_.enable_channel[ch] = true;
             else module->conf_.enable_channel[ch] = false;
             printf("Changed enable_channel %d\n",ch); fflush(stdout);
@@ -599,9 +600,10 @@ void MesytecMadc32UI::uiInput(QString _name)
             module->conf_.hold_width[ch] = sb->value();
         }
         if(_name.startsWith("thresholds")) {
-            QRegExp reg("[0-9]{1,2}");
-            reg.indexIn(_name);
-            int ch = reg.cap().toInt();
+            QRegularExpression reg("[0-9]{1,2}");
+            QRegularExpressionMatch m = reg.match(_name);
+            int ch = -1;
+			if (m.hasMatch()) ch = m.captured(0).toInt();
             module->conf_.thresholds[ch] = sb->value();
         }
 

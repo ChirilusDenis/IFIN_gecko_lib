@@ -48,7 +48,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDateTime>
 #include <algorithm>
 #include <vector>
-#include <QTime>
+// #include <QTime>
+#include <QElapsedTimer>
 #include <QCheckBox>
 #include <fstream>
 #include <QInputDialog>
@@ -84,6 +85,11 @@ protected:
     QTimer* triggerToRunManager;
     QTimer* infoPopUpBoxTimer;
 
+	// QElapsedTimer* resetTimer;
+    // QElapsedTimer* triggerToLogbook;
+    // QElapsedTimer* triggerToRunManager;
+    // QElapsedTimer* infoPopUpBoxTimer;
+
     QPushButton* addNote;
 
     QLabel* confNameLabel;
@@ -115,9 +121,12 @@ protected:
     QFile outFile;
     QDir outDir;
     QTimer* updateTimer;
-    QTime elapsedTime;
-    QTime pulsingTime;
-    QTime beamOnTime;
+    // QTime elapsedTime;
+    // QTime pulsingTime;
+    // QTime beamOnTime;
+	QElapsedTimer elapsedTime;
+    QElapsedTimer pulsingTime;
+    QElapsedTimer beamOnTime;
     QString confName;
     QString scriptName;
 
@@ -239,8 +248,6 @@ private:
     
     TDatime trigger_time;
 
-    // TODO
-    // std::vector<std::string> param_names = {"Index", "TrailingTime", "LeadingTime"};
 };
 
 #endif // EVENTBUILDERBIGROOTPLUGIN_H

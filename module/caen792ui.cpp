@@ -175,7 +175,7 @@ QWidget* Caen792UI::createDeviceControls()
 {
     QWidget *box = new QWidget(this);
     QGridLayout *l = new QGridLayout();
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
 
     dataResetButton = new QPushButton(tr("Data Reset"));
     evcntResetButton = new QPushButton(tr("Event Counter Reset"));
@@ -214,14 +214,14 @@ QWidget* Caen792UI::createThresholdsControls()
 {
     QWidget *box = new QWidget(this);
     QGridLayout *l = new QGridLayout();
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
     l->setSpacing(0);
 
     for(int ch = 0; ch < 32; ch+=2) {
         QWidget* w = new QWidget();
         {
             QHBoxLayout* h = new QHBoxLayout();
-            h->setMargin(0);
+            h->setContentsMargins(0, 0, 0, 0);
             h->setSpacing(0);
             killChannelBox[ch] = new QCheckBox(tr("Ch %1:").arg(ch));
             thresholdSpinner[ch] = new QSpinBox();
@@ -253,7 +253,7 @@ QWidget* Caen792UI::createInterruptControls()
 {
     QWidget *box = new QWidget(this);
     QGridLayout *l = new QGridLayout();
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
 
     QLabel *irqVectorLabel = new QLabel(tr("IRQ vector:"));
     irqVectorEdit = new QLineEdit(tr("0x%1").arg(module->getConfig ()->irq_vector,8,16,QChar('0')));
@@ -283,7 +283,7 @@ QWidget* Caen792UI::createInfoControls()
 {
     QWidget *box = new QWidget(this);
     QVBoxLayout *l = new QVBoxLayout();
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
 
     QLabel *fwLabel = new QLabel(tr("Firmware Info:"));
     firmwareEdit = new QLineEdit();
@@ -311,7 +311,7 @@ QWidget* Caen792UI::createSettings1Controls()
 {
     QWidget *box = new QWidget(this);
     QGridLayout *l = new QGridLayout();
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
 
     blockEndBox = new QCheckBox(tr("Block End"));
     progResetBox = new QCheckBox(tr("Prog Reset"));
@@ -336,7 +336,7 @@ QWidget* Caen792UI::createSettings2Controls()
 {
     QWidget *box = new QWidget(this);
     QGridLayout *l = new QGridLayout();
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
     QWidget *cbltbox = new QWidget();
 
     ovRangeBox = new QCheckBox(tr(     "Suppress Over Range"));
@@ -403,7 +403,7 @@ QWidget* Caen792UI::createSettings3Controls()
 {
     QWidget *box = new QWidget(this);
     QGridLayout *l = new QGridLayout();
-    l->setMargin(0);
+    l->setContentsMargins(0, 0, 0, 0);
 
     QLabel *crateNoLabel = new QLabel(tr("Crate number:"));
     crateNumberSpinner = new QSpinBox();

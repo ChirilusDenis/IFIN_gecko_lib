@@ -868,7 +868,7 @@ void EventBuilderBIGPlugin::openNewFile(){
 
         //Each block, including the file header, must be 16k bytes long. Comments is the file header without the block header
         for(int k=0;k<16352;k++)
-            comments[k]=0;
+            comments[k] = QChar(0);
 
         //Create the block header of the file header
         fhead[0]= 16;
@@ -888,7 +888,7 @@ void EventBuilderBIGPlugin::openNewFile(){
             comments[k]=filePrefix[k];
         w+=l;
 
-        comments[w]= current_file_number;
+        comments[w] = QChar(current_file_number);
         w+=2;
 
         aux="| Header (1 param) |";
@@ -907,15 +907,15 @@ void EventBuilderBIGPlugin::openNewFile(){
             for(int k=w;k<w+l;k++)
                comments[k]=aux1[k-w];
             w+=l;
-            comments[w]= j;
+            comments[w]= QChar(j);
             comments[w+1]=aux3[0];
-            comments[w+2]= totalNoDet[j];
+            comments[w+2]= QChar(totalNoDet[j]);
             w+=3;
             l=aux2.size();
             for(int k=w;k<w+l;k++)
                comments[k]=aux2[k-w];
             w+=l;
-            comments[w]=typeParam[j-1];
+            comments[w] = QChar(typeParam[j-1]);
             w++;
             l=aux4.size();
             for(int k=w;k<w+l;k++)

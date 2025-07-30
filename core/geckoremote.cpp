@@ -168,12 +168,12 @@ void GeckoRemote::processDatagram (QByteArray datagram, QHostAddress sender, uin
     }
     else if(data.startsWith("QUERY"))
     {
-        QStringList args = data.split(QRegExp(" "));
+        QStringList args = data.split(QRegularExpression(" "));
         processQuery(args, sender);
     }
     else if(data.startsWith("POST"))
     {
-        QStringList args = data.split(QRegExp(" "));
+        QStringList args = data.split(QRegularExpression(" "));
         processPost(args, sender);
     }
 }
@@ -201,44 +201,44 @@ void GeckoRemote::processQuery(QStringList query, QHostAddress sender)
         datagram = "POST ";
         datagram += "update ";
         datagram += "runname \"";
-        datagram += RunManager::ref ().getRunName ();
+        datagram += RunManager::ref ().getRunName ().toUtf8();
         datagram += "\"";
         UdpSock_->writeDatagram(datagram, sender, LocalPort_);
 
         datagram = "POST ";
         datagram += "update ";
         datagram += "start ";
-        datagram += RunManager::ref ().getStartTime ().toString();
+        datagram += RunManager::ref ().getStartTime ().toString().toUtf8();
         UdpSock_->writeDatagram(datagram, sender, LocalPort_);
 
         datagram = "POST ";
         datagram += "update ";
         datagram += "stop ";
-        datagram += RunManager::ref ().getStopTime ().toString();
+        datagram += RunManager::ref ().getStopTime ().toString().toUtf8();
         UdpSock_->writeDatagram(datagram, sender, LocalPort_);
 
         datagram = "POST ";
         datagram += "update ";
         datagram += "numberofevents ";
-        datagram += QString::number (RunManager::ref ().getEventCount ());
+        datagram += QString::number (RunManager::ref ().getEventCount ()).toUtf8();
         UdpSock_->writeDatagram(datagram, sender, LocalPort_);
 
         datagram = "POST ";
         datagram += "update ";
         datagram += "eventrate ";
-        datagram += QString::number (RunManager::ref ().getEventRate (), 'f', 2);
+        datagram += QString::number (RunManager::ref ().getEventRate (), 'f', 2).toUtf8();
         UdpSock_->writeDatagram(datagram, sender, LocalPort_);
 
         datagram = "POST ";
         datagram += "update ";
         datagram += "info ";
-        datagram += RunManager::ref ().getRunInfo ();
+        datagram += RunManager::ref ().getRunInfo ().toUtf8();
         UdpSock_->writeDatagram(datagram, sender, LocalPort_);
 
         datagram = "POST ";
         datagram += "update ";
         datagram += "cpu ";
-        datagram += QString::number(int (RunManager::ref().getSystemInfo()->getCpuLoad ()*100));
+        datagram += QString::number(int (RunManager::ref().getSystemInfo()->getCpuLoad ()*100)).toUtf8();
         UdpSock_->writeDatagram(datagram, sender, LocalPort_);
 
         datagram = "POST update end";
@@ -254,7 +254,7 @@ void GeckoRemote::processQuery(QStringList query, QHostAddress sender)
         if(RunManager::ref().isRemoteControlled())
         {
             datagram += "failed ";
-            datagram += Controller_.toString();
+            datagram += Controller_.toString().toUtf8();
         }
         else
         {
@@ -275,7 +275,7 @@ void GeckoRemote::processQuery(QStringList query, QHostAddress sender)
         if(!RunManager::ref().isRemoteControlled() || Controller_ != sender)
         {
             datagram += "failed ";
-            datagram += Controller_.toString();
+            datagram += Controller_.toString().toUtf8();
         }
         else
         {
@@ -299,7 +299,7 @@ void GeckoRemote::processQuery(QStringList query, QHostAddress sender)
         }
         else if(sender != Controller_){
             datagram += "failed ";
-            datagram += Controller_.toString();
+            datagram += Controller_.toString().toUtf8();
         }
         else if(RunManager::ref().isRunning()) {
             datagram += "state ";
@@ -319,7 +319,7 @@ void GeckoRemote::processQuery(QStringList query, QHostAddress sender)
         }
         else if(sender != Controller_){
             datagram += "failed ";
-            datagram += Controller_.toString();
+            datagram += Controller_.toString().toUtf8();
         }
         else if(!RunManager::ref().isRunning()) {
             datagram += "state ";
@@ -531,7 +531,8 @@ void GeckoRemote::processRemoteState(QStringList state)
 
 
 GeckoRemote::AddrSet GeckoRemote::getLocalAddresses () const {
-    AddrSet addrs = AddrSet::fromList (QNetworkInterface::allAddresses ());
+	QList<QHostAddress> all = QNetworkInterface::allAddresses ();
+    AddrSet addrs(all.begin(), all.end());
 
     for (AddrSet::iterator i = addrs.begin (); i != addrs.end ();)
     {

@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Event;
 class EventSlot;
 class AbstractModule;
-template <typename T> class QVector;
+// template <typename T> class QVector;
 
 class MesytecMadc32Demux
 {
