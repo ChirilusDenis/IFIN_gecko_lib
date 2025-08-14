@@ -75,7 +75,7 @@ private:
     QSpinBox* maxRef;
     uint32_t minRefValue;
     uint32_t maxRefValue;
-    D2Display *myDisplay;
+    D2Display *myDisplay = nullptr;
     bool stopAq;
 
     QLabel* calibLabel;

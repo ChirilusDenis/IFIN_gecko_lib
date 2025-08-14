@@ -35,7 +35,6 @@ int main(int argc, char **argv)
     char *av[] = { const_cast<char *>("init") };
     static TApplication app("init", &ac, av);
     ROOT::EnableThreadSafety();
-    // TROOT("gecko", "gecko");
 
     // Setup application
     QApplication a(argc, argv);
@@ -43,7 +42,8 @@ int main(int argc, char **argv)
     a.setOrganizationName("Institut für Kernphysik, TU Darmstadt");
     a.setApplicationVersion("1.0");
 
-    QT_REQUIRE_VERSION(argc, argv, "5.12.8")
+	// XXX warning: deprecated
+    QT_REQUIRE_VERSION(argc, argv, "6.4.2")
 
     // Open windows
     ScopeMainWindow s;

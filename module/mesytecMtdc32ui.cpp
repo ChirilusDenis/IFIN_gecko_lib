@@ -272,7 +272,8 @@ void MesytecMtdc32UI::createUI()
     l->addWidget(bottomButtons);
 
     this->setLayout(l);
-    connect(uif.getSignalMapper(),SIGNAL(mapped(QString)),this,SLOT(uiInput(QString)));
+    // connect(uif.getSignalMapper(),SIGNAL(mapped(QString)),this,SLOT(uiInput(QString)));
+    connect(uif.getSignalMapper(), &QSignalMapper::mappedString, this, &MesytecMtdc32UI::uiInput);
 
 //    QList<QWidget*> li = this->findChildren<QWidget*>();
 //    foreach(QWidget* w, li)

@@ -3,12 +3,12 @@
 # -------------------------------------------------
 TARGET = gecko
 TEMPLATE = app
-CONFIG += qt
+CONFIG += qt6
 QT += widgets concurrent network
 QMAKE_CC = gcc-14
 QMAKE_CXX = g++-14
 CONFIG += thread \
-    c++13
+	c++20
 QMAKE_CXXFLAGS_RELEASE += -g -march=native \
     -ggdb
 QMAKE_CXXFLAGS += $$system(root-config --cflags)

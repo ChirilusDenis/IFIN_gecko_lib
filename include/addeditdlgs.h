@@ -300,7 +300,10 @@ public:
             int i = 0;
             foreach (QString aname, amap.keys ()) {
                 QTableWidgetItem *n = new QTableWidgetItem (aname);
-                QTableWidgetItem *v = new QTableWidgetItem ((attrs.contains (aname) ? attrs.value (aname) : QVariant (amap.value (aname))).toString ());
+                // QTableWidgetItem *v = new QTableWidgetItem ((attrs.contains (aname) ? attrs.value (aname) : QVariant (amap.value (aname))).toString ());
+				QVariant val = attrs.contains (aname) ? attrs.value (aname) : QVariant(QMetaType(amap.value (aname)));
+				QTableWidgetItem *v = new QTableWidgetItem(val.toString());
+
                 n->setFlags (Qt::ItemIsEnabled);
                 v->setFlags (Qt::ItemIsEditable | Qt::ItemIsEnabled);
                 attributes_->setItem (i, 0, n);
@@ -308,8 +311,14 @@ public:
                 ++i;
             }
         } else {
-            connect (typeselector_, SIGNAL(currentIndexChanged(QString)), SLOT(typeChanged(QString)));
-            connect (groupselector_, SIGNAL(currentIndexChanged(QString)), SLOT(groupChanged(QString)));
+            // connect (typeselector_, SIGNAL(currentIndexChanged(QString)), SLOT(typeChanged(QString)));
+            // connect (groupselector_, SIGNAL(currentIndexChanged(QString)), SLOT(groupChanged(QString)));
+			connect (typeselector_, &QComboBox::currentIndexChanged, this,
+					[this](int index){typeChanged(typeselector_->itemText(index));
+					});
+			connect (groupselector_, &QComboBox::currentIndexChanged, this,
+					[this](int index){groupChanged(groupselector_->itemText(index));
+					});
             groupChanged(groupselector_->currentText());
             typeChanged (typeselector_->currentText ());
         }
@@ -339,7 +348,9 @@ private slots:
         attributes_->setRowCount (amap.size ());
         foreach (QString aname, amap.keys ()) {
             QTableWidgetItem *n = new QTableWidgetItem (aname);
-            QTableWidgetItem *v = new QTableWidgetItem (QVariant (amap.value (aname)).toString ());
+            // QTableWidgetItem *v = new QTableWidgetItem (QVariant (amap.value (aname)).toString ());
+			QVariant val(QMetaType(amap.value (aname)));
+			QTableWidgetItem *v = new QTableWidgetItem (val.toString());
             n->setFlags (Qt::ItemIsEnabled);
             v->setFlags (Qt::ItemIsEditable | Qt::ItemIsEnabled);
             attributes_->setItem (i, 0, n);
@@ -368,7 +379,7 @@ private slots:
                 QString aname = attributes_->item(i, 0)->text ();
                 if (!amap.contains (aname)) continue;
                 QVariant val = QVariant::fromValue (attributes_->item (i, 1)->text());
-                if (val.convert (amap.value (aname))) {
+                if (val.convert (QMetaType(amap.value (aname)))) {
                     attrs.insert (aname, val);
                 } else {
                     QMessageBox::warning (this, tr("Scope"), tr("Value for attribute \"%1\" is invalid").arg(aname));

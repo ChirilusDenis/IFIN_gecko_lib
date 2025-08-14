@@ -71,7 +71,7 @@ void Viewport::paintEvent(QPaintEvent *)
 void Viewport::mouseMoveEvent(QMouseEvent *ev)
 {
     QPoint p = (ev->pos());
-    QToolTip::showText(ev->globalPos(),
+    QToolTip::showText(ev->globalPosition().toPoint(),
                        tr("%1,%2").arg((this->nof_samples*p.x()/this->x),
                                        3,10).arg((int)(this->maxY*(1-1.0*p.y()/this->y)),3,10),this);
 }

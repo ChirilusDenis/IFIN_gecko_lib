@@ -20,30 +20,30 @@ void D2Display::mousePressEvent(QMouseEvent *ev)
 {
     double trueXValue,trueYValue;
 
-    trueXValue=minx+(maxx-minx)*(ev->x())/(this->geometry().width());
-    trueYValue=miny+(maxy-miny)*(ev->y())/(this->geometry().height());
+    trueXValue=minx+(maxx-minx)*(ev->position().x())/(this->geometry().width());
+    trueYValue=miny+(maxy-miny)*(ev->position().y())/(this->geometry().height());
 
     io = new QGraphicsTextItem;
     io->setDefaultTextColor(QColor(255,250,250));
     io2 = new QGraphicsTextItem;
     io2->setDefaultTextColor(QColor(255,250,250));
 
-    if ((ev->y()<25)&&(ev->x()>this->geometry().width()-180))
-        io->setPos(ev->x()-180,ev->y());
-    else if (ev->x()>this->geometry().width()-180)
-        io->setPos(ev->x()-180,ev->y()-25);
-    else if(ev->y()<25)
-        io->setPos(ev->x(),ev->y());
+    if ((ev->position().y()<25)&&(ev->position().x()>this->geometry().width()-180))
+        io->setPos(ev->position().x()-180,ev->position().y());
+    else if (ev->position().x()>this->geometry().width()-180)
+        io->setPos(ev->position().x()-180,ev->position().y()-25);
+    else if(ev->position().y()<25)
+        io->setPos(ev->position().x(),ev->position().y());
     else
-        io->setPos(ev->x(),ev->y()-25);
+        io->setPos(ev->position().x(),ev->position().y()-25);
     io->setPlainText(QString("x: ")+QString::number(trueXValue)+QString(" | ") +QString("y: ")+ QString::number(trueYValue));
 
     rect = new QGraphicsRectItem(0,0,0,0);
     scene->addItem(rect);
     scene->addItem(io);
     scene->addItem(io2);
-    this->setX1(ev->x());
-    this->setY1(ev->y());
+    this->setX1(ev->position().x());
+    this->setY1(ev->position().y());
 }
 
 void D2Display::mouseMoveEvent(QMouseEvent *ev)
@@ -51,44 +51,44 @@ void D2Display::mouseMoveEvent(QMouseEvent *ev)
     int leftCornerX, leftCornerY, rightCornerX, rightCornerY, setX, setY;
     double trueXValue,trueYValue;
 
-    trueXValue=minx+(maxx-minx)*(ev->x())/(this->geometry().width());
-    trueYValue=miny+(maxy-miny)*(ev->y())/(this->geometry().height());
+    trueXValue=minx+(maxx-minx)*(ev->position().x())/(this->geometry().width());
+    trueYValue=miny+(maxy-miny)*(ev->position().y())/(this->geometry().height());
 
     rect->setBrush(QBrush(QColor(255, 255, 255, 80)));
 
     //Find the x coordinate of the left-hand side of the zoom rectangle
-    leftCornerX = std::min(ev->x(),this->getX1());
+    leftCornerX = std::min(qRound(ev->position().x()),this->getX1());
     if(leftCornerX<0) leftCornerX=0;
     this->setD3x(leftCornerX);
 
     //Find the y coordinate of the left-hand side of the zoom rectangle
-    leftCornerY = std::min(ev->y(),this->getY1());
+    leftCornerY = std::min(qRound(ev->position().y()),this->getY1());
     if(leftCornerY<0) leftCornerY=0;
     this->setD3y(leftCornerY);
 
     //Find the width of the zoom rectangle
-    rightCornerX = std::max(ev->x(),this->getX1());
+    rightCornerX = std::max(qRound(ev->position().x()),this->getX1());
     if(rightCornerX>this->width()) rightCornerX=this->width();
     this->setD3lx(rightCornerX-leftCornerX);
 
     //Find the height of the zoom rectangle
-    rightCornerY = std::max(ev->y(),this->getY1());
+    rightCornerY = std::max(qRound(ev->position().y()),this->getY1());
     if(rightCornerY>this->height()-15) rightCornerY=this->height()-15;
     this->setD3ly(rightCornerY-leftCornerY);
 
     rect->setRect(this->getD3x(), this->getD3y(), this->getD3lx(), this->getD3ly());
 
-    if(ev->x()>this->width()-60)
+    if(ev->position().x()>this->width()-60)
         setX=this->width()-200;
-    else if (ev->x()<150)
+    else if (ev->position().x()<150)
         setX=10;
-    else setX=ev->x()-140;
+    else setX=ev->position().x()-140;
 
-    if(ev->y()>this->height()-40)
+    if(ev->position().y()>this->height()-40)
         setY=this->height()-45;
-    else if (ev->y()<10)
+    else if (ev->position().y()<10)
         setY=5;
-    else setY=ev->y()-5;
+    else setY=ev->position().y()-5;
 
     io2->setPos(setX,setY);
     io2->setPlainText(QString("x: ")+QString::number(trueXValue)+QString(" | ") +QString("y: ")+ QString::number(trueYValue));
@@ -102,13 +102,13 @@ void D2Display::mouseDoubleClickEvent()
 
 void D2Display::mouseReleaseEvent(QMouseEvent *ev)
 {
-    if(ev->x()>this->width()-11)
+    if(ev->position().x()>this->width()-11)
         this->setX2(this->width()-11);
-    else this->setX2(ev->x());
+    else this->setX2(ev->position().x());
 
-    if(ev->y()>this->height()-11)
+    if(ev->position().y()>this->height()-11)
         this->setX2(this->height()-11);
-    else this->setY2(ev->y());
+    else this->setY2(ev->position().y());
 
     if(rect->isActive())
         scene->removeItem(rect);

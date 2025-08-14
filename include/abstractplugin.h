@@ -36,7 +36,7 @@ class AbstractPlugin : public QWidget
 {
     Q_OBJECT
 public:
-    typedef QMap<QString, QVariant::Type> AttributeMap;
+	typedef QMap<QString, QMetaType::Type> AttributeMap;
     typedef QMap<QString, QVariant> Attributes;
 
     /*! The plugin groups */

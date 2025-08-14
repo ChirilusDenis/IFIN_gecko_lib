@@ -96,10 +96,10 @@ MultipleCacheHistogramPlugin::~MultipleCacheHistogramPlugin()
 AbstractPlugin::AttributeMap MultipleCacheHistogramPlugin::getMCHPAttributeMap() {
     //These are the initial settings with which the plugin is created
     AbstractPlugin::AttributeMap attrs;
-    attrs.insert ("nofInputs", QVariant::Int);
-    attrs.insert ("BGO Veto",  QVariant::Bool);
-    attrs.insert ("Extra input sets", QVariant::Int);
-    attrs.insert ("Veto extra inputs", QVariant::Bool);
+    attrs.insert ("nofInputs", QMetaType::Int);
+    attrs.insert ("BGO Veto",  QMetaType::Bool);
+    attrs.insert ("Extra input sets", QMetaType::Int);
+    attrs.insert ("Veto extra inputs", QMetaType::Bool);
     return attrs;
 }
 
@@ -448,9 +448,9 @@ void MultipleCacheHistogramPlugin::createSettings(QGridLayout * l)
 
         //Connecting the signals from right clicking to their functions
         for(int i=0;i<(4+2*extraPanels)*ninputs/2+2;i++)
-            connect(mplot[i], SIGNAL(histogramCleared(unsigned int,unsigned int)), this, SLOT(resetSingleHistogram(unsigned int,unsigned int)));
+            connect(mplot[i], SIGNAL(histogramCleared(uint,uint)), this, SLOT(resetSingleHistogram(uint,uint)));
         for(int i=0;i<(4+2*extraPanels)*ninputs/2+2;i++)
-            connect(mplot[i], SIGNAL(changeZoomForAll(unsigned int, double, double)), this, SLOT(changeBlockZoom(unsigned int, double, double)));
+            connect(mplot[i], SIGNAL(changeZoomForAll(uint, double, double)), this, SLOT(changeBlockZoom(uint, double, double)));
 
         container->setLayout(cl);
     }

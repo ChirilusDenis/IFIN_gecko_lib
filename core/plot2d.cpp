@@ -165,13 +165,13 @@ void plot2d::removeChannel(unsigned int id)
 }
 
 void plot2d::mousePressEvent (QMouseEvent *ev) {
-    if (ev->y () <= height ()*0.15 || ev->y () >= 0.85*height ()) {
+    if (ev->position().y () <= height ()*0.15 || ev->position().y () >= 0.85*height ()) {
         scalemode = ScaleX;
-        scalestart = viewport.x () + ev->x () / (1.0 * width ()) * viewport.width ();
+        scalestart = viewport.x () + ev->position().x () / (1.0 * width ()) * viewport.width ();
         scaleend = scalestart;
-    } else if (ev->x () <= width()*0.05 || ev->x () >= width ()*0.95) {
+    } else if (ev->position().x () <= width()*0.05 || ev->position().x () >= width ()*0.95) {
         scalemode = ScaleY;
-        scalestart = viewport.y () + ev->y () / (1.0 * height ()) * viewport.height ();
+        scalestart = viewport.y () + ev->position().y () / (1.0 * height ()) * viewport.height ();
         scaleend = scalestart;
     }
 }
@@ -228,21 +228,21 @@ void plot2d::mouseMoveEvent(QMouseEvent *ev)
         toolTipx2=(viewport.x()+viewport.width()*p.x()/width())*(curxmax-curxmin)*calibCoef1;
         toolTipx=toolTipx2;
 
-        QToolTip::showText(ev->globalPos(),
+        QToolTip::showText(ev->globalPosition().toPoint(),
                            tr("E:%1\nCounts:%2")
                            .arg((int)(toolTipx),3,10)
                            .arg((int)(data[toolTipx3]),3,10),this);
 
     }
     else
-        QToolTip::showText(ev->globalPos(),
+        QToolTip::showText(ev->globalPosition().toPoint(),
                            tr("%1,%2")
                            .arg((int)((viewport.x()+viewport.width()*p.x()/width())*(curxmax-curxmin)),3,10)
                            .arg((int)(data[toolTipx3]),3,10),this);
 
-    if (ev->y () <= height ()*0.15 || ev->y () >= height ()*0.85) {
+    if (ev->position().y () <= height ()*0.15 || ev->position().y () >= height ()*0.85) {
         setCursor (Qt::SizeHorCursor);
-    } else if (ev->x () <= width()*0.05 || ev->x () >= width()*0.95) {
+    } else if (ev->position().x () <= width()*0.05 || ev->position().x () >= width()*0.95) {
         setCursor (Qt::SizeVerCursor);
     } else if (scalemode == ScaleOff) {
         // XXX: does this have to happen everytime the mouse moves? --rw
@@ -251,8 +251,8 @@ void plot2d::mouseMoveEvent(QMouseEvent *ev)
 
     if (scalemode == ScaleX || scalemode == ScaleY) {
         switch (scalemode) {
-        case ScaleX: scaleend = viewport.x () + ev->x () / (1.0 * width ()) * viewport.width (); break;
-        case ScaleY: scaleend = viewport.y () + ev->y () / (1.0 * height ()) * viewport.height (); break;
+        case ScaleX: scaleend = viewport.x () + ev->position().x () / (1.0 * width ()) * viewport.width (); break;
+        case ScaleY: scaleend = viewport.y () + ev->position().y () / (1.0 * height ()) * viewport.height (); break;
         default: break;
         }
         update ();

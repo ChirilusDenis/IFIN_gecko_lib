@@ -54,7 +54,7 @@ void IntToDoublePlugin::createSettings (QGridLayout*) {}
 
 AbstractPlugin::AttributeMap IntToDoublePlugin::getIntToDoubleAttributeMap () {
     AbstractPlugin::AttributeMap attrs;
-    attrs.insert ("nofChannels", QVariant::Int);
+    attrs.insert ("nofChannels", QMetaType::Int);
     return attrs;
 }
 

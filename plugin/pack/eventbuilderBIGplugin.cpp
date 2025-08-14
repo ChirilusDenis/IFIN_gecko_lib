@@ -109,7 +109,7 @@ EventBuilderBIGPlugin::~EventBuilderBIGPlugin()
 AbstractPlugin::AttributeMap EventBuilderBIGPlugin::getEventBuilderAttributeMap() {
     AbstractPlugin::AttributeMap attrs;
     //Creates the attributes that are read on plugin creation
-    attrs.insert ("nofInputs", QVariant::Int);
+    attrs.insert ("nofInputs", QMetaType::Int);
     return attrs;
 }
 

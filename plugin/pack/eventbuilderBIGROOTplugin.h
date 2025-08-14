@@ -232,7 +232,7 @@ private:
     std::vector <uint16_t> noDetType; // Number of detectors that fired
     std::vector <uint32_t> totalNoDet; // Number of detectors from each type
     std::vector <std::vector<uint32_t> > detchan; // Config file lines without the header
-    QVector <int> typeParam;
+    QVector <int> typeParam; // Number of parameters for each type of detector
     QVector <int> resetPosition;
     QVector<QVector<uint32_t> > data; // Input data, for each channel: val timestamp val timestamp ...
     QVector<QVector<uint32_t> > dataTemp; // Post reset data if reset happened

@@ -92,7 +92,7 @@ FanOutPlugin<T>::~FanOutPlugin()
 template<class T>
 AbstractPlugin::AttributeMap FanOutPlugin<T>::getFanoutAttributeMap () {
     AbstractPlugin::AttributeMap attrs;
-    attrs.insert ("nofOutputs", QVariant::Int);
+    attrs.insert ("nofOutputs", QMetaType::Int);
     return attrs;
 }
 

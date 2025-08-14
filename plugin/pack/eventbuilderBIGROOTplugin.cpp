@@ -38,7 +38,7 @@ EventBuilderBIGROOTPlugin::EventBuilderBIGROOTPlugin(int _id, QString _name, con
 
 	//Get the number of inputs from the attributes. Check for validity
 	bool ok;
-	int _nofInputs = _attrs.value ("nofInputs", QVariant (4)).toInt (&ok);
+	int _nofInputs = _attrs.value ("nofInputs", QVariant(4)).toInt (&ok);
 	if (!ok || _nofInputs <= 0 || _nofInputs > 512) {
 		std::cout << _name.toStdString () <<" "<< _nofInputs<<": nofInputs invalid. Setting to 128." << std::endl;
 		_nofInputs = 128;
@@ -137,7 +137,7 @@ EventBuilderBIGROOTPlugin::~EventBuilderBIGROOTPlugin()
 AbstractPlugin::AttributeMap EventBuilderBIGROOTPlugin::getEventBuilderAttributeMap() {
 	AbstractPlugin::AttributeMap attrs;
 	//Creates the attributes that are read on plugin creation
-	attrs.insert ("nofInputs", QVariant::Int);
+	attrs.insert ("nofInputs", QMetaType::Int);
 	return attrs;
 }
 
@@ -1133,19 +1133,14 @@ void EventBuilderBIGROOTPlugin::makeTTree() {
 
 	// DEBUG
 	// roottree->Fill();
-
-	// DEBUG
 	// openNewFile();
 	// for (uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
 	//     for (uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {   
 	//         memset(data_tree[type_idx][param], 0xFF, totalNoDet[type_idx + 1] * sizeof(uint32_t));
 	//     }
 	// }
-	// sleep(60);
-	// trigger_time.Set();
+	// // sleep(60);
+	// // trigger_time.Set();
 	// roottree->Fill();
-
-
-	// DEBUG
 	// printf("TTree done\n");
 }
