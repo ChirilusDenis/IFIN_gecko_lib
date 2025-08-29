@@ -73,7 +73,7 @@ private:
     QList<AbstractModule*> modules;
     uint32_t* it;
     QVector <QVector<uint32_t> > v;
-    std::map<uint8_t, uint16_t> chData;
+    std::map<uint8_t, uint16_t> chData; // MULTIHIT: transform in std::multimap to add all hits
     madc32_header_t header;
     madc32_end_of_event_t trailer;
     uint32_t eventCounter;

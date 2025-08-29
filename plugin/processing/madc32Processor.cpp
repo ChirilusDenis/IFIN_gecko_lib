@@ -146,6 +146,7 @@ void MADC32Processor::continueEvent()
     //Check the subsignature
     if(dataWord.bits.sub_signature == MADC32V2_SIG_DATA_EVENT) {
         if(dataWord.bits.channel < bits) {
+					//MULTIHIT: beacause it is a normal map, only the first hit is added
                     //Insert the channel/data pair into chData
                     chData.insert(std::make_pair(+ dataWord.bits.channel,+ dataWord.bits.value));
         }

@@ -150,6 +150,7 @@ void MTDC32Processor::continueEvent()
     if(dataWord.bits.sub_signature == MTDC32V2_SIG_DATA_EVENT) {
         if(dataWord.bits.channel < bits) {
                   if(dataWord.bits.trigger !=1){
+						//MULTIHIT: because it is a normal map, only the first hit is added
                       //Insert the channel/data pair into chData
                       chData.insert(std::make_pair(+ dataWord.bits.channel,+ dataWord.bits.value));
                 }

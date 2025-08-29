@@ -1,0 +1,17 @@
+	Madc32/mtdc processors
+You have to modify them in order to keep all the hits generated. The used std::map can only keep the first hit per eventcount value.
+Solved by using a multimap.
+
+	eventbuilderBIG
+This should be able to write multihits only by checking for all values with close enough timestamps on each channel.
+If this is made to accept multihits, the translation from GASP to ROOT should also be modified to accept and write multihits.
+
+	eventbuilderBIGROOT
+This should be able to record multihits by checking for all values with close enough timestamps on each channel.
+It also needs to make sure that all the hits fit in the Ttree buffers. This can be done by switching to std::vectors or by making a variable length c-style array (https://root.cern.ch/doc/master/classTTree.html).
+
+Other plugins that use the output of the mads32/mtdc32 processors should be checked if they work correctly with multihit and updated if needed.
+MatrixPlotWalk and multiplecachehistogram *SHOULD* work fine with multihit.
+
+Sugested changes are marked with "MULTIHIT" within the source files.
+

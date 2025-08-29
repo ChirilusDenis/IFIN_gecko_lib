@@ -1070,7 +1070,9 @@ void EventBuilderBIGPlugin::writeToCache()
             for(uint16_t z=1;z<detchan[k].size()-1;z++)
             {
                 m=detchan[k][z];
-
+				
+				// MULTIHIT: catch all hits from current channel from the same event
+				// maybe count how many from each channel are from the same event
                 if(data[m].size()>=2+readPointer[m])
                     if(data[m][readPointer[m]+1]<(leastTime+offset))
                     {
@@ -1126,6 +1128,8 @@ void EventBuilderBIGPlugin::writeToCache()
                 cache[written++]=ch;
                 for(uint16_t z=1;z<detchan[j].size()-1;z++)
                 {
+					// MULTIHIT: make sure to write all hits from this event
+					// by the count made ealier or check the next timestamp until finding one from the next event
                     m=detchan[j][z];
                     if(toBeRead[m]==1)
                     moduleValue=data[m][readPointer[m]];

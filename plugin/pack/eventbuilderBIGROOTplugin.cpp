@@ -98,21 +98,16 @@ EventBuilderBIGROOTPlugin::EventBuilderBIGROOTPlugin(int _id, QString _name, con
 
 EventBuilderBIGROOTPlugin::~EventBuilderBIGROOTPlugin()
 {
-	// DEBUG
-	// printf("Strating deconstructor...\n");
-
 	// Write last data from the ttree and free used memory
 	if((rootfile != nullptr) && rootfile->IsOpen()) {
 		if (roottree != nullptr) {
 			rootfile->cd();
 			roottree->Write();
 			delete roottree;
-			// roottree = nullptr;
 		}
 		rootfile->Flush();
 		rootfile->Close();
 		delete rootfile;
-		// rootfile = nullptr;
 	}
 
 	if (read_idx != nullptr) delete[] read_idx;
@@ -127,11 +122,6 @@ EventBuilderBIGROOTPlugin::~EventBuilderBIGROOTPlugin()
 		}
 		delete[] data_tree;
 	}
-
-	// delete trigger_time;
-
-	// DEBUG
-	// printf("Deconstructor done.\n");
 }
 
 AbstractPlugin::AttributeMap EventBuilderBIGROOTPlugin::getEventBuilderAttributeMap() {
@@ -609,9 +599,6 @@ void EventBuilderBIGROOTPlugin::setWriteFolder(QString _confPath)
 }
 
 void EventBuilderBIGROOTPlugin::configureDetectors(QString setName) {
-	// DEBUG
-	// printf("Det configured\n");
-
 	typeNo=0;
 	int word, nextValue;
 	numberOfDet=0;
@@ -792,9 +779,6 @@ QString EventBuilderBIGROOTPlugin::makeFileName() {
 }
 
 void EventBuilderBIGROOTPlugin::openNewFile() {
-	//DEBUG
-	// printf("Creating new file...\n");
-
 	//Restart the reset timer
 	stopResetTimer();
 	reset=false;
@@ -860,13 +844,11 @@ void EventBuilderBIGROOTPlugin::openNewFile() {
 			if (!QProcess::startDetached("/bin/sh", QStringList{scriptName}))
 				std::cout << "Failed to run";
 
-		// DEBUG
-		// printf("(Empty roottree...)");
-		// "Emptying" the root tree by copying it with 0 entries copied
 		if (roottree != nullptr) {
-			roottree->Reset();
-			roottree->SetDirectory(rootfile);
+			roottree->Reset(); // Empty roottree for next file data
+			roottree->SetDirectory(rootfile); // Making sure the roottree will write in our new file
 		} else {
+			// First file buffers creation
 			if (data_tree == nullptr) makeTreeBuffer();
 			makeTTree();
 		}
@@ -875,13 +857,9 @@ void EventBuilderBIGROOTPlugin::openNewFile() {
 		// If the folder does not exist and could not be created, write it to the terminal
 	   printf("EventBuilderBIGROOT: The output directory does not exist and could not be created! (%s)\n", outDir.absolutePath().toStdString().c_str());
    }
-   // DEBUG
-//    printf("File done\n");
 }
 
 void EventBuilderBIGROOTPlugin::userProcess() {
-	// DEBUG
-	// printf("User process...\n");
 	
 	// If the configuration file is not read, write to prompt that there is a problem
 	if(typeNo==0) std::cout<<"WRITING PROBLEM!! No detector configuration detected!!"<<std::endl;
@@ -954,14 +932,10 @@ void EventBuilderBIGROOTPlugin::userProcess() {
 		}
 		writeToTree();
 	}
-	// DEBUG
-	// printf("User done\n");
 }
 
 // Moving data from data to roottree buffers and writing an entry to the roottree
 int EventBuilderBIGROOTPlugin::writeToTree() {
-	// DEBUG
-	// printf("Writting...\n");
 	if (roottree == nullptr || data_tree == nullptr) {
 		printf("EventbuilderBIGROOT: Writing buffers not allocced!\n");
 		return -1;
@@ -1029,6 +1003,7 @@ int EventBuilderBIGROOTPlugin::writeToTree() {
 					break;
 				}
 
+				// MULTIHIT: make sure to catch all hits with close enough timestamps
 				if (data[read_channel].size() >= read_idx[read_channel] + 2) {
 					if (data[read_channel][read_idx[read_channel] + 1] < (leastTime + offset)) {
 						// Get data from positions to read and jump to the next value to next to_read
@@ -1058,26 +1033,30 @@ int EventBuilderBIGROOTPlugin::writeToTree() {
 
 	} while (hasData);
 
-	// DEBUG
-	// printf("Write done\n");
-
 	return local_bytes;
 }
+
+/* MULTIHIT
+Make sure all the hits can fit in the tree branch buffers
+This can be done by:
+* using std::vector as branch buffers
+* using a varible length c-style array buffer (need another branch to hold the size for each buffer), 2 options:
+	- one single array big enough for all hits allocced at the begining
+	- realocate arrays when needed and set the branch buffer address to the new array address
+*/
 
 // Create buffers for roottree
 // Should be called before makeTTree()
 void EventBuilderBIGROOTPlugin::makeTreeBuffer() {
-	// DEBUG
-	// printf("Making buffers...\n");
 
 	read_idx = (uint16_t *)calloc(nofInputs, sizeof(uint16_t));
 	write_idx = (uint16_t *)calloc(typeNo, sizeof(uint16_t));
 
 	data_tree = (uint32_t ***)calloc(typeNo, sizeof(uint32_t **));
 
-	/* The first division of the tree into branches is based on the detector type
-	Those nodes divide further based on the number of parameters(channels to be read) + index for each deterctor type
-	The leaves are arrays used as buffers for the roottree branches */
+	// The first division of the tree into branches is based on the detector type
+	// Those nodes divide further based on the number of parameters(channels to be read) + index for each deterctor type
+	// The leaves are arrays used as buffers for the roottree branches
 	for (uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
 
 		data_tree[type_idx] = (uint32_t **)calloc(typeParam[type_idx] + 1, sizeof(uint32_t *));
@@ -1089,16 +1068,11 @@ void EventBuilderBIGROOTPlugin::makeTreeBuffer() {
 			data_tree[type_idx][param] = (uint32_t *)calloc(totalNoDet[type_idx + 1], sizeof(uint32_t));
 		}
 	}
-
-	// DEBUG
-	// printf("Buffers done\n");
 }
 
 // Create actual roottree
 // Should be called only after makeTreeBuffer()
 void EventBuilderBIGROOTPlugin::makeTTree() {
-	// DEBUG
-	// printf("Making TTree...\n");
 
 	std::string branch_name, leaf_name;
 
@@ -1113,15 +1087,11 @@ void EventBuilderBIGROOTPlugin::makeTTree() {
 	// Making time and date branch
 	roottree->Branch("Trigger_time", &trigger_time);
 
-	// DEBUG
-	// trigger_time.Set();
-	// trigger_time.Print();
-
 	// Making branches and linking their buffers
 	for (uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
 		for (uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {
 
-			// TODO name
+			// TODO: Make branch names configurabletop
 			if (param == 0) branch_name = "Box" + std::to_string(type_idx + 1) + "_Index"; // Form: Box{type_idx}_Index
 			else branch_name = "Box" + std::to_string(type_idx + 1) + "_Param_" + std::to_string(param); // Form: Box{type_idx}_Param_{param}
 			leaf_name = branch_name + "[" + std::to_string(totalNoDet[type_idx + 1]) + "]/I"; // Form: Box{type_idx}_Param_{param}[{nr_det}]/I
@@ -1130,17 +1100,4 @@ void EventBuilderBIGROOTPlugin::makeTTree() {
 			roottree->Branch(branch_name.c_str(), data_tree[type_idx][param], leaf_name.c_str());
 		}
 	}
-
-	// DEBUG
-	// roottree->Fill();
-	// openNewFile();
-	// for (uint16_t type_idx = 0; type_idx < typeNo; type_idx++) {
-	//     for (uint16_t param = 0; param < typeParam[type_idx] + 1; param++) {   
-	//         memset(data_tree[type_idx][param], 0xFF, totalNoDet[type_idx + 1] * sizeof(uint32_t));
-	//     }
-	// }
-	// // sleep(60);
-	// // trigger_time.Set();
-	// roottree->Fill();
-	// printf("TTree done\n");
 }
